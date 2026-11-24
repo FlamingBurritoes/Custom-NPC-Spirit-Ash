@@ -1,0 +1,75 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="SpiritCreator.Desktop.MainWindow"
+        Title="Elden Ring Spirit Creator" Width="680" Height="695" MinWidth="490" MinHeight="525"
+        WindowStartupLocation="CenterScreen">
+  <Window.Styles>
+    <Style Selector="TextBlock.muted">
+      <Setter Property="Opacity" Value="0.75" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Border.card">
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundBaseMediumLowBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Padding" Value="16" />
+    </Style>
+    <Style Selector="TextBlock.section">
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+  </Window.Styles>
+  <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="28,24" Spacing="16">
+      <StackPanel Spacing="4">
+        <TextBlock Text="Elden Ring Spirit Creator" FontWeight="SemiBold" FontSize="28" TextWrapping="Wrap" />
+        <TextBlock Classes="muted" Text="Offline alpha · Elden Ring 1.17.3 · Spirit Jellyfish Ashes" />
+      </StackPanel>
+      <Border Classes="card">
+        <StackPanel Spacing="10">
+          <TextBlock Classes="section" Text="1. Import a character" />
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <Button x:Name="ImportButton" Content="Import save…" Click="ImportSave" />
+            <TextBlock x:Name="SaveLabel" Grid.Column="1" Classes="muted" VerticalAlignment="Center"
+                       TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Text="No save selected" />
+          </Grid>
+          <ComboBox x:Name="Characters" AutomationProperties.Name="Character slot"
+                    PlaceholderText="Choose a character slot" HorizontalAlignment="Stretch"
+                    SelectionChanged="CharacterChanged" IsEnabled="False" />
+          <TextBlock Classes="muted" Text="Save files are read-only. Steam IDs and full save paths aren’t displayed or stored by the app." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section" Text="2. Choose a weapon" />
+          <ComboBox x:Name="Weapons" AutomationProperties.Name="Weapon" HorizontalAlignment="Stretch"
+                    SelectionChanged="WeaponChanged" />
+          <TextBlock Classes="muted" Text="The summon uses this weapon in both hands. Your character’s gear and stats are not imported." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section" Text="3. Export and play offline" />
+          <WrapPanel Orientation="Horizontal" ItemSpacing="10" LineSpacing="8">
+            <Button x:Name="ExportButton" Content="Export offline profile" Click="Export" IsEnabled="False" />
+            <Button x:Name="LaunchButton" Content="Launch offline" Click="Launch" IsEnabled="False" />
+          </WrapPanel>
+          <TextBlock Classes="muted" Text="Use Spirit Jellyfish Ashes on SpiritCreatorTest.sl2. Quit Elden Ring before launching a different profile." />
+          <Expander Header="Tool paths" HorizontalAlignment="Stretch">
+            <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="6">
+              <TextBlock x:Name="GameLabel" Classes="muted" VerticalAlignment="Center" />
+              <Button x:Name="GameButton" Grid.Column="1" Content="Find regulation.bin…" Click="PickGame" />
+              <TextBlock x:Name="WitchyLabel" Grid.Row="1" Classes="muted" VerticalAlignment="Center" />
+              <Button x:Name="WitchyButton" Grid.Row="1" Grid.Column="1" Content="Find WitchyBND…" Click="PickWitchy" />
+              <TextBlock x:Name="Me3Label" Grid.Row="2" Classes="muted" VerticalAlignment="Center" />
+              <Button x:Name="Me3Button" Grid.Row="2" Grid.Column="1" Content="Find ME3…" Click="PickMe3" />
+            </Grid>
+          </Expander>
+        </StackPanel>
+      </Border>
+      <ProgressBar x:Name="Busy" IsIndeterminate="True" IsVisible="False" />
+      <TextBlock x:Name="Status" Text="Select an Elden Ring save to get started." TextWrapping="Wrap"
+                 AutomationProperties.LiveSetting="Polite" />
+    </StackPanel>
+  </ScrollViewer>
+</Window>

@@ -1,0 +1,9 @@
+profileVersion = "v1"
+savefile = "SpiritCreatorTest.sl2"
+start_online = false
+
+[[supports]]
+game = "eldenring"
+
+[[packages]]
+path = "appearance-patches"
