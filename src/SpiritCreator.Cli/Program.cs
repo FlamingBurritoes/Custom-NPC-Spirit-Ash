@@ -11,7 +11,7 @@ try
         Console.WriteLine("""
             Spirit Creator CLI — offline Elden Ring 1.17.3 alpha
               import --save FILE --character NAME --profile NEW.json
-              export --profile FILE.json --regulation FILE --witchy WitchyBND.exe --out NEW_DIRECTORY
+              export --profile FILE.json --regulation FILE --out NEW_DIRECTORY
             """);
         return 0;
     }
@@ -29,12 +29,12 @@ try
         }
         case "export":
         {
-            var options = Options(args, "profile", "regulation", "witchy", "out");
+            var options = Options(args, "profile", "regulation", "out");
             using var input = File.OpenRead(options["profile"]);
             var profile = JsonSerializer.Deserialize<SpiritProfile>(input, SpiritProfile.JsonOptions)
                           ?? throw new InvalidDataException("Profile is empty.");
             profile.Validate();
-            var path = RegulationExporter.Export(profile, options["regulation"], options["witchy"], options["out"]);
+            var path = RegulationExporter.Export(profile, options["regulation"], options["out"]);
             Console.WriteLine($"Exported {profile.Character}: {path}");
             Console.WriteLine($"Launch offline: me3 launch --profile \"{path}\"");
             return 0;

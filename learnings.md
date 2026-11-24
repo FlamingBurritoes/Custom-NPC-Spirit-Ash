@@ -37,7 +37,7 @@ Start from a single-spawn ash and an already-friendly humanoid. This isolates th
 - Each build adds a `FaceParam` row `99000` and points the Jellyfish initializer (`CharaInitParam` row `99000`) at it. Both keep the Jawbone Axes and omit the helmet. The rebuilt binders were reopened and compared against the Jawbone Axe build: only `CharaInitParam` and `FaceParam` changed, and existing vanilla rows were preserved.
 - The experimental map copies 157 fields, including model choices, main face geometry, body scales, and colors. Unmapped texture/asymmetry fields retain template values; special eye overrides and nonzero accessory/decal models were not tested. The in-game result supports using a file-only exporter for the alpha, but exact likeness and import across both body types still need verification.
 
-## Repacking without Smithbox
+## Historical WitchyBND prototype
 
 1. Work from a copy of the installed `regulation.bin`. With WitchyBND, unpack the binder and convert only the target `.param` tables to XML in place. An omitted row field can use a default from the XML's `<fields>` section; it does not necessarily mean zero.
 2. On this setup, WitchyBND **3.0.1.0** shipped an ER version ceiling of `1_16_1_1000L`. Unpacking worked, but repacking the binder failed with `RegulationOutOfBoundsException`. In a **temporary copy of WitchyBND**, set `Assets/Paramdex/ER/Upgrader/version.txt` to `1_17_3_0034L`. This only changes the ceiling; it does not update the schemas. Keep the actual binder `<version>` at `11730034`.
@@ -52,5 +52,12 @@ Start from a single-spawn ash and an already-friendly humanoid. This isolates th
 ## Command-line alpha
 
 - The [C# CLI](README.md) recreates the summon from the exact stock 1.17.3 regulation, not from an earlier mod. Save import creates versioned JSON with only the selected character's name, supported appearance fields, body type, and the default weapon ID. The JSON can be edited and exported again without reading the save.
-- Export works in scratch space, adjusts the version ceiling only on its private WitchyBND copy, and checks the rebuilt regulation's table set and the values of all rows in the three changed tables before publishing. It refuses to overwrite an existing output folder.
 - Generated **FISTS + Jawbone Axe** and **FISTS + Battle Axe** packages passed file verification and were reported working in-game. This validates the CLI import → edit → export workflow for the alpha. Weapon skill behavior and upgraded ashes are not yet verified.
+
+## In-app writer and combat tuning
+
+- Spirit Battler's [read/edit/write workflow](https://github.com/kingborehaha/Elden-Ring-Spirit-Battler/blob/master/Elden%20Ring%20Spirit%20Battler/FormFuncs.cs#L269) inspired the in-app writer. This app uses its own narrow BND4/PARAM adapter, .NET AES, and ZstdSharp.Port, not SoulsFormatsNEXT or WitchyBND. The writer is pinned to the exact verified stock 1.17.3 file by SHA-256. It preserves the binder's metadata and untouched table bytes, then reopens the result before publishing.
+- At 100% HP and damage, the direct FISTS + Jawbone Axe export matched all 194 PARAM files byte-for-byte against the in-game-proven WitchyBND export after independent unpacking.
+- When tuning changes, the Jellyfish row points to private copies of Nepheli's +0 through +10 reinforcement effects. The clones keep the existing scaling curve and adjust `maxHpRate` and physical, magic, fire, lightning, and holy attack rates. The original Nepheli Puppet, AI, FP, and player attributes are untouched. The game schema calls the holy rate `darkAttackPowerRate`.
+- Tuning has file-level verification; how the rates behave in combat and on upgraded ashes still needs in-game testing.
+- The first direct writer produced the correct table bytes but overwrote the DCX compression-header length at byte 44 (the level belongs at byte 48), and Elden Ring crashed loading the resulting file. The fixed writer preserves the header length, uses the known-good 64 KiB Zstandard window without a frame content size, and matches the previous writer's DCX/AES padding. The fixed 100% export decompresses to the entire known-good binder byte-for-byte; game launch still needs a retest.

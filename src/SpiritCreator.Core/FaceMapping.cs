@@ -6,6 +6,26 @@ internal static class FaceMapping
 {
     internal static IReadOnlyDictionary<string, int> Offsets { get; } = Build();
 
+    // Convert the validated save offsets to byte offsets in the 240-byte FaceParam row.
+    internal static int ParamOffset(int source) => source switch
+    {
+        0x10 => 0, 0x14 => 60, 0x18 => 35, 0x1C => 74, 0x20 => 67, 0x24 => 85, 0x28 => 89, 0x2C => 81,
+        >= 0x30 and <= 0x32 => 113 + source - 0x30,
+        >= 0x34 and <= 0x6F => 117 + source - 0x34,
+        >= 0xB0 and <= 0xB6 => 99 + source - 0xB0,
+        >= 0xB7 and <= 0xD4 => 1 + source - 0xB7,
+        >= 0xDE and <= 0xE1 => 31 + source - 0xDE,
+        0xE2 => 39, >= 0xE3 and <= 0xE5 => 36 + source - 0xE3,
+        >= 0xE6 and <= 0xED => 40 + source - 0xE6,
+        0xEE => 51, >= 0xEF and <= 0xF1 => 48 + source - 0xEF,
+        >= 0xF2 and <= 0xF9 => 52 + source - 0xF2,
+        >= 0xFA and <= 0xFF => 61 + source - 0xFA,
+        >= 0x100 and <= 0x105 => 68 + source - 0x100,
+        >= 0x106 and <= 0x10B => 75 + source - 0x106,
+        >= 0x10C and <= 0x10E => 82 + source - 0x10C,
+        _ => throw new InvalidDataException("Appearance field lacks a regulation offset.")
+    };
+
     private static Dictionary<string, int> Build()
     {
         var fields = new Dictionary<string, int>(StringComparer.Ordinal);

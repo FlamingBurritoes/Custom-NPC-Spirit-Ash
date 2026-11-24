@@ -1,7 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="SpiritCreator.Desktop.MainWindow"
-        Title="Elden Ring Spirit Creator" Width="680" Height="695" MinWidth="490" MinHeight="525"
+        Title="Elden Ring Spirit Creator" Width="680" Height="770" MinWidth="490" MinHeight="525"
         WindowStartupLocation="CenterScreen">
   <Window.Styles>
     <Style Selector="TextBlock.muted">
@@ -41,10 +41,23 @@
       </Border>
       <Border Classes="card">
         <StackPanel Spacing="8">
-          <TextBlock Classes="section" Text="2. Choose a weapon" />
+          <TextBlock Classes="section" Text="2. Set up your companion" />
           <ComboBox x:Name="Weapons" AutomationProperties.Name="Weapon" HorizontalAlignment="Stretch"
                     SelectionChanged="WeaponChanged" />
           <TextBlock Classes="muted" Text="The summon uses this weapon in both hands. Your character’s gear and stats are not imported." />
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+            <StackPanel Spacing="4">
+              <TextBlock Text="HP (%)" />
+              <NumericUpDown x:Name="Hp" AutomationProperties.Name="HP percent" Value="100" FormatString="0"
+                             Increment="10" ClipValueToMinMax="True" ValueChanged="TuningChanged" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Spacing="4">
+              <TextBlock Text="Damage (%)" />
+              <NumericUpDown x:Name="Damage" AutomationProperties.Name="Damage percent" Value="100" FormatString="0"
+                             Increment="10" ClipValueToMinMax="True" ValueChanged="TuningChanged" />
+            </StackPanel>
+          </Grid>
+          <TextBlock Classes="muted" Text="100% keeps the default stats. These controls do not change AI, FP, or player attributes." />
         </StackPanel>
       </Border>
       <Border Classes="card">
@@ -56,13 +69,11 @@
           </WrapPanel>
           <TextBlock Classes="muted" Text="Use Spirit Jellyfish Ashes on SpiritCreatorTest.sl2. Quit Elden Ring before launching a different profile." />
           <Expander Header="Tool paths" HorizontalAlignment="Stretch">
-            <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="6">
+            <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="6">
               <TextBlock x:Name="GameLabel" Classes="muted" VerticalAlignment="Center" />
               <Button x:Name="GameButton" Grid.Column="1" Content="Find regulation.bin…" Click="PickGame" />
-              <TextBlock x:Name="WitchyLabel" Grid.Row="1" Classes="muted" VerticalAlignment="Center" />
-              <Button x:Name="WitchyButton" Grid.Row="1" Grid.Column="1" Content="Find WitchyBND…" Click="PickWitchy" />
-              <TextBlock x:Name="Me3Label" Grid.Row="2" Classes="muted" VerticalAlignment="Center" />
-              <Button x:Name="Me3Button" Grid.Row="2" Grid.Column="1" Content="Find ME3…" Click="PickMe3" />
+              <TextBlock x:Name="Me3Label" Grid.Row="1" Classes="muted" VerticalAlignment="Center" />
+              <Button x:Name="Me3Button" Grid.Row="1" Grid.Column="1" Content="Find ME3…" Click="PickMe3" />
             </Grid>
           </Expander>
         </StackPanel>

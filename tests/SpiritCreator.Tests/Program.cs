@@ -58,6 +58,27 @@ var roundTrip = JsonSerializer.Deserialize<SpiritProfile>(json, SpiritProfile.Js
 roundTrip.Validate();
 Check(profile.Face.OrderBy(p => p.Key).SequenceEqual(roundTrip.Face.OrderBy(p => p.Key)), "JSON round-trip");
 (roundTrip with { WeaponId = SpiritProfile.BattleAxe }).Validate();
+Check(roundTrip is { HpPercent: 100, DamagePercent: 100 }, "neutral combat defaults");
+var legacyJson = JsonSerializer.SerializeToNode(profile, SpiritProfile.JsonOptions)!.AsObject();
+legacyJson.Remove("hpPercent");
+legacyJson.Remove("damagePercent");
+Check(legacyJson.Deserialize<SpiritProfile>(SpiritProfile.JsonOptions) is { HpPercent: 100, DamagePercent: 100 },
+    "old profile defaults");
+(profile with { HpPercent = 200, DamagePercent = 50 }).Validate();
+Reject(() => (profile with { HpPercent = 49 }).Validate(), "minimum HP");
+Reject(() => (profile with { DamagePercent = 201 }).Validate(), "maximum damage");
+Check(FaceMapping.Offsets.Values.Select(FaceMapping.ParamOffset).Distinct().Count() == 157,
+    "unique destination appearance fields");
+var dcxHeader = new byte[76];
+BinaryPrimitives.WriteInt32BigEndian(dcxHeader.AsSpan(44), 0x20);
+dcxHeader[48] = 21;
+var dcx = RegulationBinary.CompressDcx(dcxHeader, new byte[160_000]);
+var compressedSize = BinaryPrimitives.ReadInt32BigEndian(dcx.AsSpan(32));
+Check(dcx.AsSpan(44, 5).SequenceEqual(new byte[] { 0, 0, 0, 0x20, 15 }), "DCX header length and level");
+Check(dcx.AsSpan(76, 6).SequenceEqual(new byte[] { 0x28, 0xB5, 0x2F, 0xFD, 0, 0x30 }),
+    "Zstandard frame without content size, 64 KiB window");
+Check(compressedSize > 6 && dcx.Length == ((76 + compressedSize + 15) & ~15) &&
+      dcx.AsSpan(76 + compressedSize).IndexOfAnyExcept((byte)0) == -1, "DCX zero alignment");
 Reject(() => (profile with { WeaponId = 42 }).Validate(), "weapon ID");
 Reject(() => (profile with { SchemaVersion = 2 }).Validate(), "schema");
 Reject(() => SaveAppearance.Import(bytes, "missing"), "missing slot");

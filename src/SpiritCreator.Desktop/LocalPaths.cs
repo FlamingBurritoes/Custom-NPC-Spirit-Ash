@@ -21,20 +21,6 @@ internal static class LocalPaths
             "common", "ELDEN RING", "Game", "regulation.bin"));
     }
 
-    internal static string? FindWitchy()
-    {
-        foreach (var start in new[] { AppContext.BaseDirectory, Environment.CurrentDirectory })
-        {
-            for (var directory = new DirectoryInfo(start); directory is not null; directory = directory.Parent)
-            {
-                var path = Existing(Path.Combine(directory.FullName, "WitchyBND-3.0.1.0-win-x64", "WitchyBND.exe"));
-                if (path is not null)
-                    return path;
-            }
-        }
-        return null;
-    }
-
     internal static string? FindMe3()
     {
         var candidate = Existing(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),

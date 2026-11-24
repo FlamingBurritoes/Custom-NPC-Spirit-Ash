@@ -10,18 +10,20 @@ public sealed partial class MainWindow : Window
     private string? _savePath;
     private string? _exportedProfile;
     private string? _regulation;
-    private string? _witchy;
     private string? _me3;
     private bool _busy;
+    private bool _ready;
 
     public MainWindow()
     {
         InitializeComponent();
+        Hp.Minimum = Damage.Minimum = SpiritProfile.MinPercent;
+        Hp.Maximum = Damage.Maximum = SpiritProfile.MaxPercent;
         Weapons.ItemsSource = SpiritProfile.SupportedWeapons;
         Weapons.SelectedIndex = 0;
         _regulation = LocalPaths.FindStockRegulation();
-        _witchy = LocalPaths.FindWitchy();
         _me3 = LocalPaths.FindMe3();
+        _ready = true;
         Refresh();
     }
 
@@ -67,9 +69,15 @@ public sealed partial class MainWindow : Window
         if (_savePath is not { } path || Characters.SelectedItem is not CharacterSlot slot ||
             Weapons.SelectedItem is not WeaponChoice weapon)
             return;
-        if (_regulation is not { } regulation || _witchy is not { } witchy)
+        if (_regulation is not { } regulation)
         {
-            Status.Text = "Open Tool paths and locate the stock regulation.bin and WitchyBND 3.0.1.0.";
+            Status.Text = "Open Tool paths and locate the stock Elden Ring regulation.bin.";
+            return;
+        }
+        if (Hp.Value is not { } hp || Damage.Value is not { } damage ||
+            hp != decimal.Truncate(hp) || damage != decimal.Truncate(damage))
+        {
+            Status.Text = $"Enter whole HP and damage percentages from {SpiritProfile.MinPercent} to {SpiritProfile.MaxPercent}.";
             return;
         }
 
@@ -87,8 +95,10 @@ public sealed partial class MainWindow : Window
                 Status.Text = "Could not reopen the selected save. Import it again or select a backup.";
                 return;
             }
-            _exportedProfile = await Task.Run(() => RegulationExporter.Export(profile with { WeaponId = weapon.Id },
-                regulation, witchy, LocalPaths.NewExportFolder()));
+            _exportedProfile = await Task.Run(() => RegulationExporter.Export(profile with
+            {
+                WeaponId = weapon.Id, HpPercent = (int)hp, DamagePercent = (int)damage
+            }, regulation, LocalPaths.NewExportFolder()));
             Status.Text = $"Exported {slot.Name}. Choose Launch offline when the game is closed.";
         }
         catch (Exception ex) when (ExpectedFailure(ex))
@@ -140,9 +150,12 @@ public sealed partial class MainWindow : Window
 
     private void CharacterChanged(object? sender, SelectionChangedEventArgs e) => ResetExport();
     private void WeaponChanged(object? sender, SelectionChangedEventArgs e) => ResetExport();
+    private void TuningChanged(object? sender, NumericUpDownValueChangedEventArgs e) => ResetExport();
 
     private void ResetExport()
     {
+        if (!_ready)
+            return;
         var hadExport = _exportedProfile is not null;
         _exportedProfile = null;
         if (hadExport && !_busy)
@@ -152,8 +165,6 @@ public sealed partial class MainWindow : Window
 
     private async void PickGame(object? sender, RoutedEventArgs e) =>
         await PickTool("Select the stock regulation.bin from the Elden Ring Game folder", "regulation.bin", path => _regulation = path);
-    private async void PickWitchy(object? sender, RoutedEventArgs e) =>
-        await PickTool("Select WitchyBND 3.0.1.0", "WitchyBND.exe", path => _witchy = path);
     private async void PickMe3(object? sender, RoutedEventArgs e) =>
         await PickTool("Select Mod Engine 3", "me3.exe", path => _me3 = path);
 
@@ -208,12 +219,12 @@ public sealed partial class MainWindow : Window
     private void Refresh()
     {
         Busy.IsVisible = _busy;
-        ImportButton.IsEnabled = Weapons.IsEnabled = GameButton.IsEnabled = WitchyButton.IsEnabled = Me3Button.IsEnabled = !_busy;
+        ImportButton.IsEnabled = Weapons.IsEnabled = Hp.IsEnabled = Damage.IsEnabled =
+            GameButton.IsEnabled = Me3Button.IsEnabled = !_busy;
         Characters.IsEnabled = !_busy && _savePath is not null && Characters.ItemCount > 0;
         ExportButton.IsEnabled = !_busy && Characters.SelectedItem is CharacterSlot && Weapons.SelectedItem is WeaponChoice;
         LaunchButton.IsEnabled = !_busy && _exportedProfile is not null;
         GameLabel.Text = _regulation is null ? "Game file: not found" : "Game file: regulation.bin selected";
-        WitchyLabel.Text = _witchy is null ? "WitchyBND: not found" : "WitchyBND: selected";
         Me3Label.Text = _me3 is null ? "ME3: not found" : "ME3: selected";
     }
 

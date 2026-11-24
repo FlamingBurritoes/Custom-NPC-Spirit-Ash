@@ -15,6 +15,9 @@ public sealed record SpiritProfile
     public required byte BodyType { get; init; }
     public required int WeaponId { get; init; }
     public required Dictionary<string, byte> Face { get; init; }
+    public int HpPercent { get; init; } = 100;
+    public int DamagePercent { get; init; } = 100;
+    public const int MinPercent = 50, MaxPercent = 200;
 
     public static JsonSerializerOptions JsonOptions { get; } = new()
     {
@@ -33,6 +36,8 @@ public sealed record SpiritProfile
             throw new InvalidDataException("Invalid character name or body type.");
         if (!SupportedWeapons.Any(weapon => weapon.Id == WeaponId))
             throw new InvalidDataException($"Unknown alpha weapon ID {WeaponId}. Choose {string.Join(" or ", SupportedWeapons.Select(weapon => $"{weapon.Name} ({weapon.Id})"))}.");
+        if (HpPercent is < MinPercent or > MaxPercent || DamagePercent is < MinPercent or > MaxPercent)
+            throw new InvalidDataException($"HP and damage must each be between {MinPercent}% and {MaxPercent}%.");
         if (Face is null || !FaceMapping.Offsets.Keys.ToHashSet(StringComparer.Ordinal).SetEquals(Face.Keys))
             throw new InvalidDataException("The profile does not contain the expected appearance fields.");
         if (Face["accessories_partsId"] != 0 || Face["decal_partsId"] != 0)
