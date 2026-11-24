@@ -1,0 +1,52 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Eleonora, Violet",
+    "summonName": "Eleonora, Violet Bloody Finger",
+    "bodyType": 0,
+    "weaponId": 34080000,
+    "leftWeaponId": 10050000,
+    "leftReinforcement": 2,
+    "attributes": {
+      "vigor": 31,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 12,
+      "dexterity": 21,
+      "intelligence": 10,
+      "faith": 28,
+      "arcane": 19
+    },
+    "armor": {
+      "head": 60000,
+      "chest": 60100,
+      "hands": 60200,
+      "legs": 60300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      7001,
+      7090
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23270,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

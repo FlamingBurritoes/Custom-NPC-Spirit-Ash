@@ -1,0 +1,46 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Redmane Freyja",
+    "summonName": "Redmane Freyja",
+    "bodyType": 0,
+    "weaponId": 8510000,
+    "leftWeaponId": 31530000,
+    "rightAshOfWarId": 415000,
+    "attributes": {
+      "vigor": 31,
+      "mind": 15,
+      "endurance": 30,
+      "strength": 25,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 19
+    },
+    "armor": {
+      "head": 5120000,
+      "chest": 5120100,
+      "hands": 5120200,
+      "legs": 5120300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024170,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

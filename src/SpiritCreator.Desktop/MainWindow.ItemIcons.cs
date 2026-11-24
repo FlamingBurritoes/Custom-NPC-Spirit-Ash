@@ -62,7 +62,7 @@ public sealed partial class MainWindow
 
     private void ResizeItemIcons(double width)
     {
-        var size = width switch { >= 1000 => SummonPortrait.Size, >= 720 => 128, _ => 104 };
+        var size = width switch { >= 1000 => InventoryIcons.IconSize, >= 720 => 128, _ => 104 };
         if (_iconSize == size)
             return;
         _iconSize = size;
@@ -139,7 +139,7 @@ public sealed partial class MainWindow
 
     private static WriteableBitmap MakeIcon(byte[] pixels)
     {
-        const int size = SummonPortrait.Size;
+        const int size = InventoryIcons.IconSize;
         // Convert straight RGBA to premultiplied BGRA for Avalonia/Skia.
         for (var i = 0; i < pixels.Length; i += 4)
         {

@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Dryleaf Dane",
+    "summonName": "Dryleaf Dane",
+    "bodyType": 1,
+    "weaponId": 34500000,
+    "leftWeaponId": 60500000,
+    "leftAshOfWarId": 401000,
+    "attributes": {
+      "vigor": 31,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 24,
+      "dexterity": 22,
+      "intelligence": 17,
+      "faith": 27,
+      "arcane": 30
+    },
+    "armor": {
+      "head": 3000000,
+      "chest": 3000100,
+      "hands": 3000200,
+      "legs": 3000300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [
+      6700
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024250,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

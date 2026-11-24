@@ -1,0 +1,38 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Blaidd",
+    "summonName": "Blaidd",
+    "bodyType": 1,
+    "weaponId": 4060000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 26,
+      "dexterity": 18,
+      "intelligence": 22,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 170000,
+      "chest": 170100,
+      "hands": 170200,
+      "legs": 170300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

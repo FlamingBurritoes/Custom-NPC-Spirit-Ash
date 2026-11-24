@@ -57,13 +57,16 @@ public static class ExtrasCatalog
         new(1700, "Throwing Dagger", 10, 10000001, 10170000, 1)
     });
 
-    public static string? LoadoutProblem(IReadOnlyList<int>? talismans, IReadOnlyList<ConsumableStack>? items)
+    public static string? LoadoutProblem(IReadOnlyList<int>? talismans, IReadOnlyList<ConsumableStack>? items) =>
+        LoadoutProblem(talismans, items, false);
+
+    internal static string? LoadoutProblem(IReadOnlyList<int>? talismans, IReadOnlyList<ConsumableStack>? items, bool draft)
     {
         if (talismans is not null)
         {
             if (talismans.Count > TalismanSlots)
                 return $"Choose at most {TalismanSlots} talismans.";
-            if (talismans.Where(id => id != EquipmentCatalog.Empty).Distinct().Count() !=
+            if (!draft && talismans.Where(id => id != EquipmentCatalog.Empty).Distinct().Count() !=
                 talismans.Count(id => id != EquipmentCatalog.Empty))
                 return "Choose each talisman only once.";
             foreach (var id in talismans)
@@ -79,7 +82,7 @@ public static class ExtrasCatalog
             {
                 if (stack is null || Consumables.FirstOrDefault(choice => choice.Id >= 0 && choice.Id == stack.Id) is not { } item)
                     return "Unknown consumable. Choose an item from the companion catalog.";
-                if (!seen.Add(item.Id))
+                if (!seen.Add(item.Id) && !draft)
                     return "Choose each consumable only once; set its quantity in that slot.";
                 if (stack.Quantity < 1 || stack.Quantity > item.MaxQuantity)
                     return $"{item.Name} quantity must be between 1 and {item.MaxQuantity}.";

@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Bloody Finger Ok",
+    "summonName": "Bloody Finger Okina",
+    "bodyType": 1,
+    "weaponId": 9040000,
+    "leftWeaponId": 1100000,
+    "leftAshOfWarId": 80000,
+    "rightReinforcement": 2,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 17,
+      "strength": 14,
+      "dexterity": 18,
+      "intelligence": 10,
+      "faith": 14,
+      "arcane": 20
+    },
+    "armor": {
+      "head": -1,
+      "chest": 872100,
+      "hands": 872200,
+      "legs": 872300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23550,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

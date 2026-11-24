@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Flame Guardian",
+    "summonName": "Flame Guardian",
+    "bodyType": 1,
+    "weaponId": 34020000,
+    "leftWeaponId": 16080000,
+    "rightReinforcement": 10,
+    "leftReinforcement": 2,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 20,
+      "dexterity": 15,
+      "intelligence": 10,
+      "faith": 16,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 330000,
+      "chest": 160100,
+      "hands": -1,
+      "legs": 160300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      6030
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23830,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

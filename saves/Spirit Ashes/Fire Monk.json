@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Fire Monk",
+    "summonName": "Fire Monk",
+    "targetAshId": 227000,
+    "targetBuddyRowId": 22700000,
+    "bodyType": 1,
+    "weaponId": 8070000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 18,
+      "dexterity": 18,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 350000,
+      "chest": 350100,
+      "hands": 350200,
+      "legs": 350300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

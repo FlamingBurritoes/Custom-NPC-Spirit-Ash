@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Albinauric",
+    "summonName": "Albinauric",
+    "targetAshId": 211000,
+    "targetBuddyRowId": 21100000,
+    "bodyType": 1,
+    "weaponId": 14050000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 11,
+      "dexterity": 11,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 20
+    },
+    "armor": {
+      "head": 1060000,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Patches",
+    "summonName": "Patches",
+    "bodyType": 1,
+    "weaponId": 16010000,
+    "leftWeaponId": 32210000,
+    "rightAshOfWarId": 50300,
+    "leftAshOfWarId": 30900,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 30,
+      "dexterity": 15,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 1400100,
+      "hands": 1400200,
+      "legs": 1400300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23090,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 2
+    },
+    null,
+    null
+  ]
+}

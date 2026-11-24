@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Rileigh the Idle",
+    "summonName": "Rileigh the Idle",
+    "bodyType": 1,
+    "weaponId": 1080000,
+    "leftWeaponId": 43110000,
+    "leftAmmoId": 52030000,
+    "rightReinforcement": 5,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 18,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 880000,
+      "chest": 880100,
+      "hands": 880200,
+      "legs": 880300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23460,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

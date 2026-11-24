@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Clayman",
+    "summonName": "Clayman",
+    "targetAshId": 222000,
+    "targetBuddyRowId": 22200000,
+    "bodyType": 1,
+    "weaponId": 16030000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 12,
+      "dexterity": 10,
+      "intelligence": 12,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

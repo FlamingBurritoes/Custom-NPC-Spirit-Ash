@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Ensha of the Roy",
+    "summonName": "Ensha of the Royal Remains",
+    "bodyType": 0,
+    "weaponId": 33250000,
+    "leftWeaponId": 21110000,
+    "leftReinforcement": 3,
+    "attributes": {
+      "vigor": 20,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 22,
+      "intelligence": 36,
+      "faith": 10,
+      "arcane": 16
+    },
+    "armor": {
+      "head": 690000,
+      "chest": 690100,
+      "hands": 690200,
+      "legs": 690300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      4721
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23390,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

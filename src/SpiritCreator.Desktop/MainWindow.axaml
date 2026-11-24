@@ -28,6 +28,11 @@
       <StackPanel Spacing="4">
         <TextBlock Text="Elden Ring Spirit Creator" FontWeight="SemiBold" FontSize="28" TextWrapping="Wrap" />
         <TextBlock Classes="muted" Text="Offline alpha · Elden Ring 1.17.3" />
+        <WrapPanel ItemSpacing="8" LineSpacing="4" Margin="0,4,0,0">
+          <Button x:Name="SaveBuildButton" Content="Save build…" Click="SaveBuild" />
+          <Button x:Name="LoadBuildButton" Content="Load build…" Click="LoadBuild" />
+        </WrapPanel>
+        <TextBlock x:Name="BuildStatus" Classes="muted" IsVisible="False" AutomationProperties.LiveSetting="Polite" />
       </StackPanel>
       <Border Classes="card">
         <StackPanel Spacing="10">
@@ -223,21 +228,8 @@
             <TextBlock Text="Summon name" />
             <TextBox x:Name="SummonNameBox" AutomationProperties.Name="Summon name"
                      Watermark="Leave blank to keep the original Ash name" MaxLength="40" TextChanged="SummonNameChanged" />
-            <TextBlock Classes="muted" Text="Renames the summon and its Ashes in English (US). A custom name requires the installed Game folder." />
+            <TextBlock Classes="muted" Text="Renames the Ashes in English (US). Spirit Ashes do not show a cooperator-style overhead nameplate. A custom name requires the installed Game folder." />
             <TextBlock x:Name="SummonNameProblem" Classes="muted" AutomationProperties.LiveSetting="Polite" />
-          </StackPanel>
-          <StackPanel Spacing="4">
-            <TextBlock Text="Ashes portrait (optional)" />
-            <Grid ColumnDefinitions="Auto,*">
-               <Image x:Name="PortraitPreview" Width="160" Height="160" Margin="0,0,10,0" IsVisible="False" />
-              <StackPanel Grid.Column="1" Spacing="4">
-                <WrapPanel ItemSpacing="8" LineSpacing="4">
-                  <Button x:Name="ImportPortraitButton" Content="Import portrait…" Click="ImportPortrait" />
-                  <Button x:Name="ClearPortraitButton" Content="Remove" Click="ClearPortrait" IsEnabled="False" />
-                </WrapPanel>
-                <TextBlock Classes="muted" Text="PNG or JPEG. Center-cropped to replace the regular Ashes icon. Needs the installed Game folder and adds about 65 MB to the export." />
-              </StackPanel>
-            </Grid>
           </StackPanel>
           <StackPanel Spacing="4">
             <TextBlock Text="Companion shade" />
@@ -252,12 +244,18 @@
                              Increment="10" ClipValueToMinMax="True" ValueChanged="TuningChanged" />
             </StackPanel>
             <StackPanel Grid.Column="1" Spacing="4">
-              <TextBlock Text="Damage (%)" />
-              <NumericUpDown x:Name="Damage" AutomationProperties.Name="Damage percent" Value="100" FormatString="0"
+               <TextBlock Text="Attack power (% of stock)" />
+               <NumericUpDown x:Name="Damage" AutomationProperties.Name="Attack power percent" Value="100" FormatString="0"
                              Increment="10" ClipValueToMinMax="True" ValueChanged="TuningChanged" />
             </StackPanel>
           </Grid>
-          <TextBlock Classes="muted" Text="100% keeps the default stats. These controls do not change AI, FP, or player attributes." />
+          <TextBlock Classes="muted" Text="100% keeps stock HP and attack power for the Ash’s upgrade level." />
+          <StackPanel Spacing="4">
+            <TextBlock Text="Spirit outgoing damage" />
+            <ComboBox x:Name="OutgoingDamage" AutomationProperties.Name="Spirit outgoing damage"
+                      HorizontalAlignment="Stretch" SelectionChanged="OutgoingDamageChanged" />
+            <TextBlock Classes="muted" Text="Stock spirits deal 25% at this step. 100% removes this penalty; higher values add a bonus. This stacks with Ash upgrades and the attack power setting. Poise damage and damage taken are unchanged." />
+          </StackPanel>
         </StackPanel>
       </Border>
       <Border Classes="card">

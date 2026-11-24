@@ -1,0 +1,47 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Silver Tear",
+    "summonName": "Silver Tear",
+    "bodyType": 0,
+    "weaponId": 43020000,
+    "leftWeaponId": -1,
+    "rightAmmoId": 52000000,
+    "rightReinforcement": 9,
+    "attributes": {
+      "vigor": 17,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 16,
+      "dexterity": 14,
+      "intelligence": 14,
+      "faith": 14,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23680,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

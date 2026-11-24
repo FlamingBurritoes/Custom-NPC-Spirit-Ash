@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Sanguine Noble N",
+    "summonName": "Sanguine Noble Nataan",
+    "bodyType": 1,
+    "weaponId": 1040000,
+    "leftWeaponId": 1040000,
+    "attributes": {
+      "vigor": 22,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 20,
+      "arcane": 30
+    },
+    "armor": {
+      "head": 320000,
+      "chest": 320100,
+      "hands": -1,
+      "legs": 320300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024260,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

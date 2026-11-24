@@ -1,0 +1,43 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Blackflame Monk",
+    "summonName": "Blackflame Monk Amon",
+    "targetAshId": 228000,
+    "targetBuddyRowId": 22800000,
+    "bodyType": 1,
+    "weaponId": 34010000,
+    "leftWeaponId": 8070000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 18,
+      "dexterity": 18,
+      "intelligence": 10,
+      "faith": 28,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 351000,
+      "chest": 351100,
+      "hands": 351200,
+      "legs": 351300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [
+      6210,
+      6230
+    ],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

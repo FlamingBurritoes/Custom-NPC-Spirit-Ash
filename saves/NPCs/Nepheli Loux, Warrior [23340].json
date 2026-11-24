@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Nepheli Loux, Wa",
+    "summonName": "Nepheli Loux, Warrior",
+    "bodyType": 0,
+    "weaponId": 14140000,
+    "leftWeaponId": 14140000,
+    "rightReinforcement": 3,
+    "leftReinforcement": 3,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 14,
+      "strength": 19,
+      "dexterity": 15,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 730000,
+      "chest": 730100,
+      "hands": 730200,
+      "legs": 730300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23340,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

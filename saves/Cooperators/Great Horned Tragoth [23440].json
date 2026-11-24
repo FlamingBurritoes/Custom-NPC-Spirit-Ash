@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Great Horned Tra",
+    "summonName": "Great Horned Tragoth",
+    "bodyType": 1,
+    "weaponId": 23110000,
+    "leftWeaponId": 43080000,
+    "leftAmmoId": 52000000,
+    "rightAshOfWarId": 50600,
+    "rightReinforcement": 8,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 31,
+      "mind": 10,
+      "endurance": 17,
+      "strength": 60,
+      "dexterity": 12,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 140000,
+      "chest": 140100,
+      "hands": 140200,
+      "legs": 140300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      4020,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23440,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

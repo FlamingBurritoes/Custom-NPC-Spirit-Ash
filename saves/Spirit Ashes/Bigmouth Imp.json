@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Bigmouth Imp",
+    "summonName": "Bigmouth Imp",
+    "targetAshId": 2210000,
+    "targetBuddyRowId": 31100000,
+    "bodyType": 1,
+    "weaponId": 44010000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 34,
+      "dexterity": 12,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5330000,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

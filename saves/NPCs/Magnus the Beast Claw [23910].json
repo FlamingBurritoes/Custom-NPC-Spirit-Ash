@@ -1,0 +1,52 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Magnus the Beast",
+    "summonName": "Magnus the Beast Claw",
+    "bodyType": 1,
+    "weaponId": 34040000,
+    "leftWeaponId": 12180000,
+    "leftAshOfWarId": 10000,
+    "rightReinforcement": 11,
+    "leftReinforcement": 9,
+    "attributes": {
+      "vigor": 32,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 22,
+      "dexterity": 12,
+      "intelligence": 10,
+      "faith": 15,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 220000,
+      "chest": 300100,
+      "hands": -1,
+      "legs": 620300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      6800,
+      6820,
+      6830
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23910,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

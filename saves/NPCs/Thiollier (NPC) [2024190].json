@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Thiollier",
+    "summonName": "Thiollier",
+    "bodyType": 1,
+    "weaponId": 61540000,
+    "leftWeaponId": 21500000,
+    "attributes": {
+      "vigor": 22,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 22,
+      "intelligence": 15,
+      "faith": 18,
+      "arcane": 18
+    },
+    "armor": {
+      "head": 5030000,
+      "chest": 5030100,
+      "hands": 5030200,
+      "legs": 5030300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024190,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

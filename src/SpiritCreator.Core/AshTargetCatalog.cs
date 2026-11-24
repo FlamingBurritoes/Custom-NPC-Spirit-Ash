@@ -21,10 +21,13 @@ public static class AshTargetCatalog
                 .OrderBy(row => row.RowId).ToArray())))
         .OrderBy(ash => ash.Name, StringComparer.OrdinalIgnoreCase).ToArray());
 
+    internal static AshTargetChoice Find(int? goodsId) =>
+        Options.FirstOrDefault(ash => ash.GoodsId == (goodsId ?? DefaultGoodsId))
+            ?? throw new InvalidDataException("Choose a supported Spirit Ash.");
+
     internal static (AshTargetChoice Ash, AshSpawnChoice Row) Resolve(int? goodsId, int? rowId)
     {
-        var ash = Options.FirstOrDefault(ash => ash.GoodsId == (goodsId ?? DefaultGoodsId))
-            ?? throw new InvalidDataException("Choose a supported Spirit Ash.");
+        var ash = Find(goodsId);
         var row = rowId is null && ash.Rows.Count == 1 ? ash.Rows[0] :
             ash.Rows.FirstOrDefault(row => row.RowId == rowId);
         return (ash, row ?? throw new InvalidDataException($"Choose a valid spawn row for {ash.Name}."));

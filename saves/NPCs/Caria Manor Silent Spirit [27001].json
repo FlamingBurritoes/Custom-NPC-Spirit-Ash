@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Caria Manor Sile",
+    "summonName": "Caria Manor Silent Spirit",
+    "bodyType": 1,
+    "weaponId": -1,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 20,
+      "mind": 20,
+      "endurance": 14,
+      "strength": 25,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 980000,
+      "chest": 980100,
+      "hands": 980200,
+      "legs": 980300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 27001,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

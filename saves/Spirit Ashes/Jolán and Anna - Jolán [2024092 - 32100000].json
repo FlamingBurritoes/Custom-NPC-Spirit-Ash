@@ -1,0 +1,47 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Jol\u00E1n and Anna -",
+    "summonName": "Jol\u00E1n and Anna - Jol\u00E1n",
+    "targetAshId": 2220000,
+    "targetBuddyRowId": 32100000,
+    "bodyType": 0,
+    "weaponId": 9500000,
+    "leftWeaponId": 21550000,
+    "attributes": {
+      "vigor": 27,
+      "mind": 15,
+      "endurance": 30,
+      "strength": 15,
+      "dexterity": 30,
+      "intelligence": 18,
+      "faith": 18,
+      "arcane": 15
+    },
+    "armor": {
+      "head": 5090000,
+      "chest": 5090100,
+      "hands": 5090200,
+      "legs": 5090300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024090,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

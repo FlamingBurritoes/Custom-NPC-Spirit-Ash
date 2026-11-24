@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Horned Warrior",
+    "summonName": "Horned Warrior",
+    "targetAshId": 2214000,
+    "targetBuddyRowId": 31500000,
+    "bodyType": 1,
+    "weaponId": 8520000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 19,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 13,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5250000,
+      "chest": 5250100,
+      "hands": 5250200,
+      "legs": 5250300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

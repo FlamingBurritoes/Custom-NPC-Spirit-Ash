@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Nepheli Loux Pup",
+    "summonName": "Nepheli Loux Puppet",
+    "targetAshId": 259000,
+    "targetBuddyRowId": 25900000,
+    "bodyType": 0,
+    "weaponId": 14140000,
+    "leftWeaponId": 14140000,
+    "rightReinforcement": 4,
+    "leftReinforcement": 4,
+    "attributes": {
+      "vigor": 48,
+      "mind": 12,
+      "endurance": 19,
+      "strength": 55,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 730000,
+      "chest": 730100,
+      "hands": 730200,
+      "legs": 730300
+    },
+    "shade": "Puppet",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      1210,
+      2130,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23340,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

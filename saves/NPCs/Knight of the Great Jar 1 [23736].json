@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Knight of the Gr",
+    "summonName": "Knight of the Great Jar 1",
+    "bodyType": 0,
+    "weaponId": 1030000,
+    "leftWeaponId": 30000000,
+    "rightAshOfWarId": 11900,
+    "leftAshOfWarId": 30200,
+    "rightAffinity": "Keen",
+    "rightReinforcement": 25,
+    "leftReinforcement": 25,
+    "attributes": {
+      "vigor": 71,
+      "mind": 27,
+      "endurance": 24,
+      "strength": 65,
+      "dexterity": 99,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 620000,
+      "chest": 930100,
+      "hands": 1400200,
+      "legs": 1400300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23730,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

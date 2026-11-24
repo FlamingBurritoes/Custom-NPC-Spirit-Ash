@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Swordhand of Nig",
+    "summonName": "Swordhand of Night Jol\u00E1n",
+    "bodyType": 0,
+    "weaponId": 9500000,
+    "leftWeaponId": 21550000,
+    "attributes": {
+      "vigor": 22,
+      "mind": 15,
+      "endurance": 30,
+      "strength": 15,
+      "dexterity": 22,
+      "intelligence": 18,
+      "faith": 20,
+      "arcane": 15
+    },
+    "armor": {
+      "head": 5090000,
+      "chest": 5090100,
+      "hands": 5090200,
+      "legs": 5090300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024090,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

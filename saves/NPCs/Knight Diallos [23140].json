@@ -1,0 +1,52 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Knight Diallos",
+    "summonName": "Knight Diallos",
+    "bodyType": 1,
+    "weaponId": 20050000,
+    "leftWeaponId": 32020000,
+    "rightAshOfWarId": 50300,
+    "leftAshOfWarId": 30900,
+    "rightReinforcement": 3,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 32,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 650100,
+      "hands": 650200,
+      "legs": 650300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23140,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

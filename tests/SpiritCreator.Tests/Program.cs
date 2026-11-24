@@ -193,6 +193,7 @@ Check(legacyJson.Deserialize<SpiritProfile>(SpiritProfile.JsonOptions) is
 (profile with { HpPercent = 200, DamagePercent = 50 }).Validate();
 Reject(() => (profile with { HpPercent = 49 }).Validate(), "minimum HP");
 Reject(() => (profile with { DamagePercent = 201 }).Validate(), "maximum damage");
+Reject(() => (profile with { OutgoingDamagePercent = 101 }).Validate(), "unsupported spirit outgoing damage");
 Check(FaceMapping.Offsets.Values.Select(FaceMapping.ParamOffset).Distinct().Count() == 157,
     "unique destination appearance fields");
 var dcxHeader = new byte[76];
@@ -241,18 +242,173 @@ var defaultRoundTrip = JsonSerializer.Deserialize<SpiritProfile>(
 defaultRoundTrip.Validate();
 Check(defaultRoundTrip.Face is null && defaultRoundTrip.BodyType == 1, "omitted appearance uses stock Type A");
 Reject(() => (defaultProfile with { Face = [] }).Validate(), "incomplete imported face is not the default");
+VerifyBuildFiles();
 if (args.Length > 0)
 {
     var stockPath = args[0];
     VerifyCombatExports(stockPath);
     VerifyAshTargets(stockPath);
     VerifyDefaultAppearance(stockPath);
+    VerifySpiritDamage(stockPath);
+    if (args.Contains("--presets", StringComparer.Ordinal))
+        VerifyPresets(stockPath);
     if (args.Contains("--names", StringComparer.Ordinal))
         VerifySummonName(stockPath);
-    if (args.Contains("--portrait", StringComparer.Ordinal))
-        VerifyPortrait(stockPath);
     if (args.Contains("--icons", StringComparer.Ordinal))
         VerifyInventoryIcons(stockPath);
+}
+
+void VerifySpiritDamage(string stockPath)
+{
+    var stock = RegulationBinary.Read(File.ReadAllBytes(stockPath));
+    var stockEffects = new RegulationParam(stock.Table("SpEffectParam"), "SP_EFFECT_PARAM_ST", 912);
+    var stockNpcs = new RegulationParam(stock.Table("NpcParam"), "NPC_PARAM_ST", 736);
+    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-outgoing-tests-" + Guid.NewGuid().ToString("N"));
+    try
+    {
+        foreach (var (outgoing, attackPower) in new[] { ((int?)null, 100), ((int?)25, 100), ((int?)50, 100), ((int?)100, 100), ((int?)150, 125) })
+        {
+            var output = Path.Combine(root, outgoing?.ToString() ?? "legacy");
+            RegulationExporter.Export(defaultProfile with
+            {
+                Shade = CompanionShade.Puppet, DamagePercent = attackPower, OutgoingDamagePercent = outgoing,
+                TargetAshId = 232000, TargetBuddyRowId = 23200001
+            }, stockPath, output);
+            var exported = RegulationBinary.Read(File.ReadAllBytes(Path.Combine(output, "mod", "regulation.bin")));
+            var effects = new RegulationParam(exported.Table("SpEffectParam"), "SP_EFFECT_PARAM_ST", 912);
+            var npcs = new RegulationParam(exported.Table("NpcParam"), "NPC_PARAM_ST", 736);
+            var summon = new RegulationParam(exported.Table("BuddyParam"), "BUDDY_PARAM_ST", 160).Row(23200001);
+            var adjusted = outgoing is not (null or 25);
+            var npcId = RegulationBinary.I32(summon, 8);
+            Check(npcId == (adjusted ? 100000021 : 100000020), "only a custom outgoing rate requires a private NPC on this setup");
+            Check(npcs.Row(100000020).SequenceEqual(stockNpcs.Row(100000020)) &&
+                effects.Row(296000).SequenceEqual(stockEffects.Row(296000)), "stock puppet and stock penalty stay unchanged");
+            var expectedNpc = stockNpcs.Row(100000020).ToArray();
+            RegulationBinary.Write32(expectedNpc, 532, adjusted ? 900012 : 296000);
+            Check(npcs.Row(npcId).SequenceEqual(expectedNpc), "custom NPC differs only in the referenced penalty");
+            var expectedEffect = stockEffects.Row(296000).ToArray();
+            if (adjusted)
+                for (var offset = 652; offset <= 688; offset += 4)
+                    BinaryPrimitives.WriteSingleLittleEndian(expectedEffect.AsSpan(offset, 4), outgoing!.Value / 100f);
+            Check(effects.Row(RegulationBinary.I32(npcs.Row(npcId), 532)).SequenceEqual(expectedEffect),
+                "only outgoing damage channels change, not absorption or poise");
+            for (var level = 0; level <= 10; level++)
+            {
+                var reference = RegulationBinary.I32(summon, 40 + level * 4);
+                var originalRate = BinaryPrimitives.ReadSingleLittleEndian(stockEffects.Row(290050 + level)[72..]);
+                var currentRate = BinaryPrimitives.ReadSingleLittleEndian(effects.Row(reference)[72..]);
+                Check(currentRate == originalRate * (attackPower / 100f), "Ash scaling remains independent of outgoing damage");
+            }
+        }
+        Console.WriteLine("Spirit outgoing damage verified: legacy, stock, reduced penalty, no penalty, and bonus with attack-power tuning.");
+    }
+    finally
+    {
+        if (Directory.Exists(root))
+            Directory.Delete(root, recursive: true);
+    }
+}
+
+void VerifyPresets(string stockPath)
+{
+    var directory = Path.GetFullPath("saves");
+    var files = Directory.GetFiles(directory, "*.json", SearchOption.AllDirectories);
+    var index = File.ReadLines(Path.Combine(directory, "index.tsv")).Skip(1).Select(line => line.Split('\t')[0]).ToArray();
+    Check(files.Length >= 300 && index.Length == files.Length &&
+        index.ToHashSet(StringComparer.OrdinalIgnoreCase).SetEquals(files.Select(
+            file => Path.GetRelativePath(directory, file).Replace('\\', '/'))), "preset files match the index");
+    var stock = RegulationBinary.Read(File.ReadAllBytes(stockPath));
+    var faces = new RegulationParam(stock.Table("FaceParam"), "FACE_PARAM_ST", 240);
+    var samples = new[] { "23252", "23041", "2024092 - 32100000", "2024121 - 32200000", "23232 - 26000000", "Black Knife Tiche" };
+    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-preset-tests-" + Guid.NewGuid().ToString("N"));
+    var exported = 0;
+    try
+    {
+        foreach (var file in files)
+        {
+            var profileFromFile = SpiritBuild.Load(file).ToExportProfile();
+            profileFromFile.Validate();
+            Check(profileFromFile.StockFaceId is not { } stockFace || faces.Contains(stockFace), $"preset face exists: {file}");
+            if (!samples.Any(key => Path.GetFileNameWithoutExtension(file).EndsWith(
+                key == "Black Knife Tiche" ? key : $"[{key}]", StringComparison.Ordinal)))
+                continue;
+            var output = Path.Combine(root, (exported++).ToString());
+            // The dedicated name test covers asset encoding; here verify the stock
+            // character/loadout and spawn data without repacking the English archives six times.
+            RegulationExporter.Export(profileFromFile with { SummonName = null }, stockPath, output);
+            var mod = Path.Combine(output, "mod");
+            Check(!Directory.Exists(Path.Combine(mod, "menu")), "no portrait assets in export");
+            var result = RegulationBinary.Read(File.ReadAllBytes(Path.Combine(mod, "regulation.bin")));
+            Check(result.Table("FaceParam").SequenceEqual(stock.Table("FaceParam")), "preset export retains stock face data");
+            if (profileFromFile.StockFaceId is { } expectedFace)
+            {
+                var chars = new RegulationParam(result.Table("CharaInitParam"), "CHARACTER_INIT_PARAM", 320);
+                Check(RegulationBinary.I32(chars.Row(99000), 164) == expectedFace, "export points to the preset’s stock face");
+            }
+        }
+        Check(exported == samples.Length, "all representative presets were exported");
+        Console.WriteLine($"Validated {files.Length} shipped presets and exported {exported} representative builds.");
+    }
+    finally
+    {
+        if (Directory.Exists(root))
+            Directory.Delete(root, recursive: true);
+    }
+}
+
+void VerifyBuildFiles()
+{
+    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-build-tests-" + Guid.NewGuid().ToString("N"));
+    Directory.CreateDirectory(root);
+    var path = Path.Combine(root, "Build.json");
+    try
+    {
+        var build = new SpiritBuild
+        {
+            Profile = withAshes with
+            {
+                Armor = new(Head: 1500000, Chest: 5200100), TargetAshId = 232000, TargetBuddyRowId = 23200001,
+                SummonName = "Lúthien", Shade = CompanionShade.Puppet, HpPercent = 135, DamagePercent = 84, OutgoingDamagePercent = 150,
+                CombatPreset = CombatPreset.Default, TalismanIds = [-1, 1000, -1, 4003]
+            },
+            QuickItems = [null, new(300, 3), new(50201, 1)],
+            OtherSpellLoadouts = new() { [EquipmentCatalog.GlintstoneStaff] = [4000], [EquipmentCatalog.FingerSeal] = [] }
+        };
+        build.Save(path);
+        var loaded = SpiritBuild.Load(path);
+        Check(JsonSerializer.Serialize(build, SpiritProfile.JsonOptions) == JsonSerializer.Serialize(loaded, SpiritProfile.JsonOptions),
+            "all build settings survive disk round-trip");
+        Check(loaded.ToExportProfile().Consumables!.SequenceEqual(new[] { new ConsumableStack(300, 3), new(50201, 1) }),
+            "export compacts occupied quick-item slots");
+        loaded.ToExportProfile().Validate();
+
+        var draft = new SpiritBuild
+        {
+            Profile = defaultProfile with { TargetAshId = 232000, CombatPreset = CombatPreset.Caster, TalismanIds = [1000, 1000] },
+            QuickItems = [null, null, null]
+        };
+        draft.Save(path);
+        var loadedDraft = SpiritBuild.Load(path);
+        Check(loadedDraft.Profile is { Face: null, TargetBuddyRowId: null },
+            "default appearance and unfinished target survive overwrite");
+        Reject(() => loadedDraft.ToExportProfile().Validate(), "draft does not bypass export validation");
+        Reject(() => (draft with { BuildVersion = 2 }).Save(path), "unknown build version");
+        var legacy = JsonSerializer.SerializeToNode(draft, SpiritProfile.JsonOptions)!.AsObject();
+        legacy["portraitRgba"] = "AQID";
+        File.WriteAllText(path, legacy.ToJsonString());
+        var migrated = SpiritBuild.Load(path);
+        migrated.Save(path);
+        Check(!File.ReadAllText(path).Contains("portraitRgba", StringComparison.Ordinal), "old portrait dropped on save");
+        Check(SpiritBuild.Load(path).Profile.TargetAshId == 232000 && Directory.GetFiles(root).Length == 1,
+            "rejected save preserves previous file and leaves no temp files");
+        File.WriteAllText(path, new string(' ', 512 * 1024 + 1));
+        Reject(() => SpiritBuild.Load(path), "oversized JSON build");
+        Console.WriteLine("Build JSON verified: appearance, loadout, draft validation, legacy portrait removal, and invalid input.");
+    }
+    finally
+    {
+        Directory.Delete(root, recursive: true);
+    }
 }
 
 void VerifyDefaultAppearance(string stockPath)
@@ -305,7 +461,7 @@ void VerifyInventoryIcons(string stockPath)
     foreach (var item in samples)
     {
         var rgba = icons.ReadRgba(item);
-        Check(rgba?.Length == SummonPortrait.RgbaBytes, $"{item} has an inventory image");
+        Check(rgba?.Length == StockIconAtlas.RgbaBytes, $"{item} has an inventory image");
         var alpha = rgba!.Where((_, i) => i % 4 == 3);
         Check(alpha.Any(a => a == 0) && alpha.Any(a => a > 160), $"{item} has transparent background and visible art");
         Check(unique.Add(Convert.ToHexString(MD5.HashData(rgba!))), $"{item} has distinct art");
@@ -313,58 +469,6 @@ void VerifyInventoryIcons(string stockPath)
     Check(icons.ReadRgba(new(InventoryKind.AshOfWar, -1)) is null, "default weapon skill is not an item");
     Check(icons.ReadRgba(new(InventoryKind.Consumable, 1220)) is null, "missing stock art stays blank");
     Console.WriteLine("Inventory images verified for weapon, ammunition, armor, talisman, consumable, spell, Ash of War, and base/DLC Spirit Ashes.");
-}
-
-void VerifyPortrait(string stockPath)
-{
-    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-portrait-tests-" + Guid.NewGuid().ToString("N"));
-    var folder = Path.GetDirectoryName(Path.GetFullPath(stockPath))!;
-    try
-    {
-        var rgba = new byte[SummonPortrait.RgbaBytes];
-        for (var pixel = 0; pixel < rgba.Length; pixel += 4)
-        {
-            rgba[pixel] = 213;
-            rgba[pixel + 1] = 51;
-            rgba[pixel + 2] = 95;
-            rgba[pixel + 3] = 255;
-        }
-        RegulationExporter.Export(profile with { TargetAshId = 2200000 }, stockPath, root, rgba);
-        var mod = Path.Combine(root, "mod");
-        Check(!Directory.Exists(Path.Combine(mod, "msg")), "portrait works without a custom name");
-        using var archive = new StockMessageArchive(folder);
-        using var codec = new MessageOodle(Path.Combine(folder, "oo2core_6_win64.dll"));
-        var path = SummonPortrait.RelativePath;
-        var stock = codec.Decode(archive.ReadAsset("/" + path, 70_000_000), 204_000_000);
-        var portrait = codec.Decode(File.ReadAllBytes(Path.Combine(mod, path)), 204_000_000);
-        var layout = SummonPortrait.ReadTiles(SummonPortrait.ReadLayout(archive, codec));
-        foreach (var ash in AshTargetCatalog.Options)
-            _ = SummonPortrait.LocateTile(stock, SummonPortrait.FindTile(layout, ash.IconId));
-        var meera = AshTargetCatalog.Options.Single(ash => ash.GoodsId == 2200000);
-        var (start, stride) = SummonPortrait.LocateTile(stock, SummonPortrait.FindTile(layout, meera.IconId));
-        Check(stock.Length == portrait.Length, "portrait preserves texture layout");
-        // Mode 6 solid-color block with odd endpoint components and all zero interpolation indices.
-        var expected = Convert.FromHexString("40B53A9379BDFEFF0100000000000000");
-        Span<byte> block = stackalloc byte[16];
-        SummonPortrait.EncodeBlock(rgba.AsSpan(0, 64), block);
-        Check(block.SequenceEqual(expected), $"BC7 solid-color encoding: {Convert.ToHexString(block)}");
-        var cursor = 0;
-        for (var y = 0; y < 40; y++)
-        {
-            var at = start + y * stride;
-            Check(stock.AsSpan(cursor, at - cursor).SequenceEqual(portrait.AsSpan(cursor, at - cursor)), "art outside icon is unchanged");
-            for (var x = 0; x < 40; x++)
-                Check(portrait.AsSpan(at + x * 16, 16).SequenceEqual(expected), "icon contains test portrait");
-            cursor = at + 40 * 16;
-        }
-        Check(stock.AsSpan(cursor).SequenceEqual(portrait.AsSpan(cursor)), "remaining textures are unchanged");
-        Console.WriteLine("Portrait export verified: all 1,600 replacement blocks and all untouched atlas bytes.");
-    }
-    finally
-    {
-        if (Directory.Exists(root))
-            Directory.Delete(root, recursive: true);
-    }
 }
 
 void VerifySummonName(string stockPath)

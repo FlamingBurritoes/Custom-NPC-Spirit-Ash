@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Nightmaiden Pupp",
+    "summonName": "Nightmaiden Puppet",
+    "targetAshId": 206000,
+    "targetBuddyRowId": 20600000,
+    "bodyType": 0,
+    "weaponId": 11120000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 17,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 293000,
+      "chest": 293100,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

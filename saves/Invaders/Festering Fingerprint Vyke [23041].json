@@ -1,0 +1,53 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Festering Finger",
+    "summonName": "Festering Fingerprint Vyke",
+    "bodyType": 1,
+    "weaponId": 34030000,
+    "leftWeaponId": 17050000,
+    "rightReinforcement": 5,
+    "leftReinforcement": 2,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 16,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 22,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      7310,
+      7320
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23040,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

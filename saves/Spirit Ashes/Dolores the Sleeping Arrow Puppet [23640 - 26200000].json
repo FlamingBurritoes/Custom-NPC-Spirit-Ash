@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Dolores the Slee",
+    "summonName": "Dolores the Sleeping Arrow Puppet",
+    "targetAshId": 262000,
+    "targetBuddyRowId": 26200000,
+    "bodyType": 0,
+    "weaponId": 40020000,
+    "leftWeaponId": -1,
+    "rightAmmoId": 50040000,
+    "attributes": {
+      "vigor": 25,
+      "mind": 30,
+      "endurance": 25,
+      "strength": 18,
+      "dexterity": 30,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 380000,
+      "chest": 221100,
+      "hands": -1,
+      "legs": 220300
+    },
+    "shade": "Puppet",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23640,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

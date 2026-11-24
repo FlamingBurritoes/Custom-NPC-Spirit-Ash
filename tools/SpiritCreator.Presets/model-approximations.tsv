@@ -1,0 +1,73 @@
+# Ash goods ID (-1 for other NPC)	Title	Buddy row (-1 for first)	Right hand	Left hand	Head	Chest	Hands	Legs	Spells (| separated)
+200000	Black Knife Tiche	-1	Black Knife	-	Black Knife Hood	Black Knife Armor	Black Knife Gauntlets	Black Knife Greaves	-
+201000	Banished Knight Oleg	-1	Banished Knight's Greatsword	Banished Knight's Greatsword	Banished Knight Helm	Banished Knight Armor	Banished Knight Gauntlets	Banished Knight Greaves	-
+202000	Banished Knight Engvall	-1	Banished Knight's Halberd	-	Banished Knight Helm	Banished Knight Armor	Banished Knight Gauntlets	Banished Knight Greaves	-
+203000	Fanged Imp	-1	Forked Hatchet	-	Imp Head (Cat)	-	-	-	-
+204000	Latenna the Albinauric	-1	Longbow	-	-	Traveler's Clothes	Traveler's Manchettes	Traveler's Boots	-
+205000	Nomad	-1	Torch	-	Nomadic Merchant's Chapeau	Nomadic Merchant's Finery	-	Nomadic Merchant's Trousers	-
+206000	Nightmaiden Puppet	20600000	Nox Flowing Hammer	-	Night Maiden Twin Crown	Night Maiden Armor	-	-	-
+206000	Swordstress Puppet	20600001	Nox Flowing Sword	-	Nox Swordstress Crown	Nox Swordstress Armor	-	-	-
+208000	Crystalian	-1	Crystal Spear	-	-	-	-	-	-
+209000	Ancestral Follower	-1	Longbow	-	-	Shaman Furs	-	Shaman Leggings	-
+210000	Winged Misbegotten	-1	Misbegotten Shortbow	-	-	-	-	-	-
+211000	Albinauric	-1	Ripple Blade	-	Albinauric Mask	-	-	-	-
+212000	Skeletal Militiaman	-1	Spear	-	-	-	-	-	-
+213000	Skeletal Bandit	-1	Grossmesser	-	-	-	-	-	-
+214000	Oracle Envoy	-1	Envoy's Horn	-	Envoy Crown	-	-	-	-
+215000	Putrid Corpse	-1	-	-	-	-	-	-	-
+216000	Depraved Perfumer Carmaan	-1	Perfumer's Shield	-	Depraved Perfumer Headscarf	Depraved Perfumer Robe	Depraved Perfumer Gloves	Depraved Perfumer Trousers	-
+217000	Perfumer Tricia	-1	Dagger	Perfumer's Shield	Perfumer Hood	Perfumer Robe	Perfumer Gloves	Perfumer Sarong	-
+218000	Glintstone Sorcerer	-1	Glintstone Staff	-	Karolos Glintstone Crown	Raya Lucarian Robe	-	-	Glintstone Pebble
+219000	Twinsage Sorcerer	-1	Academy Glintstone Staff	-	Twinsage Glintstone Crown	Raya Lucarian Robe	-	-	Glintstone Pebble|Glintstone Cometshard
+220000	Page	-1	Rapier	-	Page Hood	Page Garb	-	Page Trousers	-
+221000	Battlemage Hugues	-1	Academy Glintstone Staff	-	Haima Glintstone Crown	Battlemage Robe	Battlemage Manchettes	Battlemage Legwraps	Cannon of Haima|Gavel of Haima
+222000	Clayman	-1	Clayman's Harpoon	-	-	-	-	-	-
+225000	Marionette Soldier	-1	Shortbow	Shortbow	-	-	-	-	-
+226000	Avionette Soldier	-1	Forked Hatchet	Forked Hatchet	-	-	-	-	-
+223000	Cleanrot Knight Finlay	-1	Cleanrot Knight's Sword	Halo Scythe	Cleanrot Helm	Cleanrot Armor	Cleanrot Gauntlets	Cleanrot Greaves	-
+224000	Kindred of Rot	-1	Pest's Glaive	-	-	-	-	-	-
+227000	Fire Monk	-1	Monk's Flameblade	-	Fire Monk Hood	Fire Monk Armor	Fire Monk Gauntlets	Fire Monk Greaves	-
+228000	Blackflame Monk Amon	-1	Godslayer's Seal	Monk's Flameblade	Blackflame Monk Hood	Blackflame Monk Armor	Blackflame Monk Gauntlets	Blackflame Monk Greaves	Black Flame|Scouring Black Flame
+229000	Man-Serpent	-1	Serpent-God's Curved Sword	-	-	-	-	-	-
+230000	Azula Beastman	-1	Beastman's Cleaver	-	-	-	-	-	-
+231000	Kaiden Sellsword	-1	Dismounter	-	Kaiden Helm	Kaiden Armor	Kaiden Gauntlets	Kaiden Trousers	-
+234000	Demi-Human	-1	Club	-	-	-	-	-	-
+239000	Bloodhound Knight Floh	-1	Bloodhound's Fang	Bloodhound Claws	Bloodhound Knight Helm	Bloodhound Knight Armor	Bloodhound Knight Gauntlets	Bloodhound Knight Greaves	-
+240000	Wandering Noble	-1	Weathered Straight Sword	Torch	Aristocrat Headband	Aristocrat Garb	-	Aristocrat Boots	-
+241000	Noble Sorcerer	-1	Glintstone Staff	-	Old Aristocrat Cowl	Old Aristocrat Gown	-	Old Aristocrat Shoes	Glintstone Pebble
+242000	Vulgar Militiaman	-1	Vulgar Militia Saw	-	Vulgar Militia Helm	Vulgar Militia Armor	Vulgar Militia Gauntlets	Vulgar Militia Greaves	-
+243000	Mad Pumpkin Head	-1	Chainlink Flail	-	Pumpkin Helm	-	-	-	-
+247000	Omenkiller Rollo	-1	Great Omenkiller Cleaver	Great Omenkiller Cleaver	Omensmirk Mask	Omenkiller Robe	Omenkiller Long Gloves	Omenkiller Boots	-
+248000	Greatshield Soldier	-1	Short Spear	Inverted Hawk Towershield	-	Foot Soldier Tabard	Foot Soldier Gauntlets	Foot Soldier Greaves	-
+249000	Ancestral Archer	-1	Longbow	-	-	Shaman Furs	-	Shaman Leggings	-
+250000	Godrick Soldier	-1	Lordsworn's Straight Sword	Brass Shield	Godrick Soldier Helm	Tree-and-Beast Surcoat	Godrick Soldier Gauntlets	Godrick Soldier Greaves	-
+251000	Raya Lucaria Soldier	-1	Lordsworn's Straight Sword	Brass Shield	Raya Lucarian Helm	Cuckoo Surcoat	Raya Lucarian Gauntlets	Raya Lucarian Greaves	-
+252000	Leyndell Soldier	-1	Partisan	Brass Shield	Leyndell Soldier Helm	Erdtree Surcoat	Leyndell Soldier Gauntlets	Leyndell Soldier Greaves	-
+253000	Radahn Soldier	-1	Partisan	-	Redmane Knight Helm	Redmane Surcoat	-	-	-
+254000	Mausoleum Soldier	-1	Lordsworn's Straight Sword	-	-	Mausoleum Surcoat	Mausoleum Gauntlets	Mausoleum Greaves	-
+255000	Haligtree Soldier	-1	Lordsworn's Straight Sword	-	Haligtree Helm	Haligtree Crest Surcoat	Haligtree Gauntlets	Haligtree Greaves	-
+256000	Ancient Dragon Knight Kristoff	-1	Partisan	Golden Greatshield	Leyndell Knight Helm	Leyndell Knight Armor	Leyndell Knight Gauntlets	Leyndell Knight Greaves	-
+257000	Redmane Knight Ogha	-1	Greatbow	-	Redmane Knight Helm	Redmane Knight Armor	Redmane Knight Gauntlets	Redmane Knight Greaves	-
+258000	Lhutel the Headless	-1	Lance	Eclipse Crest Greatshield	-	Mausoleum Knight Armor	Mausoleum Knight Gauntlets	Mausoleum Knight Greaves	-
+2200000	Curseblade Meera	-1	Curseblade's Cirque	-	Curseblade Mask	-	-	-	-
+2201000	Bloodfiend Hexer	-1	Staff of the Guilty	-	-	-	-	-	Briars of Sin
+2203000	Fire Knight Hilde	-1	Fire Knight's Seal	Fire Knight's Greatsword	Fire Knight Helm	Fire Knight Armor	Fire Knight Gauntlets	Fire Knight Greaves	Fire Serpent
+2205000	Inquisitor	-1	Barbed Staff-Spear	-	-	-	-	-	-
+2206000	Demi-Human Swordsman Yosh	-1	Star-Lined Sword	-	-	-	-	-	-
+2207000	Messmer Soldier	-1	Messmer Soldier's Spear	-	Messmer Soldier Helm	Messmer Soldier Armor	Messmer Soldier Gauntlets	Messmer Soldier Greaves	-
+2208000	Black Knight Commander Andreas	-1	Black Steel Greathammer	Black Steel Greatshield	Black Knight Helm	Black Knight Armor	Black Knight Gauntlets	Black Knight Greaves	-
+2209000	Black Knight Captain Huw	-1	Black Steel Twinblade	-	Black Knight Helm	Black Knight Armor	Black Knight Gauntlets	Black Knight Greaves	-
+2210000	Bigmouth Imp	-1	Jar Cannon	-	Imp Head (Lion)	-	-	-	-
+2211000	Man-Fly	-1	-	-	-	-	-	-	-
+2212000	Taylew the Golem Smith	-1	Smithscript Greathammer	-	-	-	-	-	-
+2213000	Divine Bird Warrior Ornis	-1	Horned Warrior's Sword	Horned Warrior's Sword	Divine Bird Helm	Divine Bird Warrior Armor	Divine Bird Warrior Gauntlets	Divine Bird Warrior Greaves	-
+2214000	Horned Warrior	-1	Horned Warrior's Greatsword	-	Horned Warrior Helm	Horned Warrior Armor	Horned Warrior Gauntlets	Horned Warrior Greaves	-
+-1	Melina	-1	Blade of Calling	-	-	Traveler's Clothes	Traveler's Manchettes	Traveler's Boots	-
+-1	Blaidd	-1	Royal Greatsword	-	Black Wolf Mask	Blaidd's Armor	Blaidd's Gauntlets	Blaidd's Greaves	-
+-1	Ranni the Witch	-1	Carian Regal Scepter	-	Snow Witch Hat	Snow Witch Robe	-	Snow Witch Skirt	Ranni's Dark Moon
+-1	Baleful Shadow	-1	Royal Greatsword	-	Black Wolf Mask	Blaidd's Armor	Blaidd's Gauntlets	Blaidd's Greaves	-
+-1	Merchant Kalé	-1	-	-	Nomadic Merchant's Chapeau	Nomadic Merchant's Finery	-	Nomadic Merchant's Trousers	-
+-1	Albus	-1	-	-	Albinauric Mask	-	-	-	-
+-1	Pidia	-1	-	-	Albinauric Mask	-	-	-	-
+-1	Malenia	-1	Hand of Malenia	-	Malenia's Winged Helm	Malenia's Armor	Malenia's Gauntlet	Malenia's Greaves	-
+-1	Messmer	-1	Spear of the Impaler	-	Messmer's Helm	Messmer's Armor	Messmer's Gauntlets	Messmer's Greaves	-

@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Finger Maiden Th",
+    "summonName": "Finger Maiden Therolina Puppet",
+    "targetAshId": 261000,
+    "targetBuddyRowId": 26100000,
+    "bodyType": 0,
+    "weaponId": 34000000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 15,
+      "mind": 77,
+      "endurance": 10,
+      "strength": 12,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 45,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 900000,
+      "chest": 901100,
+      "hands": 900200,
+      "legs": 900300
+    },
+    "shade": "Puppet",
+    "combatPreset": "Caster",
+    "spellIds": [
+      6422
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23630,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Count Ymir, High",
+    "summonName": "Count Ymir, High Priest",
+    "bodyType": 1,
+    "weaponId": -1,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 31,
+      "mind": 35,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 22,
+      "intelligence": 30,
+      "faith": 26,
+      "arcane": 19
+    },
+    "armor": {
+      "head": 5060000,
+      "chest": 5060100,
+      "hands": 5060200,
+      "legs": 5060300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024200,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Human",
+    "summonName": "Human",
+    "bodyType": 1,
+    "weaponId": -1,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 20,
+      "mind": 20,
+      "endurance": 14,
+      "strength": 20,
+      "dexterity": 20,
+      "intelligence": 20,
+      "faith": 20,
+      "arcane": 20
+    },
+    "armor": {
+      "head": 160000,
+      "chest": 160100,
+      "hands": -1,
+      "legs": 160300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 27900,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Rakshasa",
+    "summonName": "Rakshasa",
+    "bodyType": 0,
+    "weaponId": 66520000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 35,
+      "mind": 16,
+      "endurance": 30,
+      "strength": 15,
+      "dexterity": 27,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 11
+    },
+    "armor": {
+      "head": 5160000,
+      "chest": 5160100,
+      "hands": 5160200,
+      "legs": 5160300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024230,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

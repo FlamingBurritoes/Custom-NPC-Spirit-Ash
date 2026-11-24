@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Bloody Finger Ne",
+    "summonName": "Bloody Finger Nerijus",
+    "bodyType": 1,
+    "weaponId": 1040000,
+    "leftWeaponId": 1040000,
+    "rightReinforcement": 10,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 15,
+      "strength": 10,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 13
+    },
+    "armor": {
+      "head": 320000,
+      "chest": 320100,
+      "hands": -1,
+      "legs": 320300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23430,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

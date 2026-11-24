@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Greatshield Sold",
+    "summonName": "Greatshield Soldier",
+    "targetAshId": 248000,
+    "targetBuddyRowId": 24800000,
+    "bodyType": 1,
+    "weaponId": 16000000,
+    "leftWeaponId": 32210000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 30,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 1840100,
+      "hands": 1830200,
+      "legs": 1830300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Perfumer Tricia",
+    "summonName": "Perfumer Tricia",
+    "targetAshId": 217000,
+    "targetBuddyRowId": 21700000,
+    "bodyType": 0,
+    "weaponId": 1000000,
+    "leftWeaponId": 30010000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 90000,
+      "chest": 90100,
+      "hands": 90200,
+      "legs": 90300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

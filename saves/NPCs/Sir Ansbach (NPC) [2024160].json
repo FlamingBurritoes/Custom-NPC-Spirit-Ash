@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Sir Ansbach",
+    "summonName": "Sir Ansbach",
+    "bodyType": 1,
+    "weaponId": 41510000,
+    "leftWeaponId": 5020000,
+    "rightAmmoId": 50000000,
+    "leftAshOfWarId": 10100,
+    "rightReinforcement": 6,
+    "attributes": {
+      "vigor": 31,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 43,
+      "intelligence": 10,
+      "faith": 40,
+      "arcane": 30
+    },
+    "armor": {
+      "head": 5110000,
+      "chest": 5110100,
+      "hands": 5110200,
+      "legs": 5110300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024160,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Yura, Hunter of",
+    "summonName": "Yura, Hunter of Bloody Fingers",
+    "bodyType": 1,
+    "weaponId": 9010000,
+    "leftWeaponId": -1,
+    "rightAshOfWarId": 10100,
+    "rightReinforcement": 7,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 18,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 150100,
+      "hands": 150200,
+      "legs": 150300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23180,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -44,9 +44,14 @@ public sealed record SpiritProfile
     public int[]? TalismanIds { get; init; }
     public ConsumableStack[]? Consumables { get; init; }
     public Dictionary<string, byte>? Face { get; init; }
+    public int? StockFaceId { get; init; }
     public int HpPercent { get; init; } = 100;
     public int DamagePercent { get; init; } = 100;
+    public int? OutgoingDamagePercent { get; init; }
     public const int MinPercent = 50, MaxPercent = 200;
+    public const int StockOutgoingDamagePercent = 25;
+    public static IReadOnlyList<int> OutgoingDamageOptions { get; } =
+        Array.AsReadOnly(new[] { 10, StockOutgoingDamagePercent, 50, 75, 100, 125, 150, 200, 300 });
 
     public static SpiritProfile CreateDefault() => new()
     {
@@ -63,7 +68,9 @@ public sealed record SpiritProfile
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
     };
 
-    public void Validate()
+    public void Validate() => Validate(draft: false);
+
+    internal void Validate(bool draft)
     {
         if (SchemaVersion != 1 || RegulationVersion != Regulation)
             throw new InvalidDataException("Expected profile schema 1 and Elden Ring 1.17.3 (11730034).");
@@ -72,7 +79,10 @@ public sealed record SpiritProfile
             throw new InvalidDataException("Invalid character name or body type.");
         if (!IsValidSummonName(SummonName))
             throw new InvalidDataException($"Use up to {MaxSummonNameLength} characters of plain text for the summon name.");
-        AshTargetCatalog.Resolve(TargetAshId, TargetBuddyRowId);
+        if (draft && TargetBuddyRowId is null)
+            AshTargetCatalog.Find(TargetAshId);
+        else
+            AshTargetCatalog.Resolve(TargetAshId, TargetBuddyRowId);
         Attributes?.Validate();
         if (!Enum.IsDefined(Shade))
             throw new InvalidDataException("Unknown companion shade.");
@@ -80,11 +90,15 @@ public sealed record SpiritProfile
         var left = EquipmentCatalog.Weapon(LeftWeaponId ?? WeaponId);
         AmmunitionCatalog.Resolve(right.Id, RightAmmoId);
         AmmunitionCatalog.Resolve(left.Id, LeftAmmoId);
-        if (CombatPresetChoice.LoadoutProblem(CombatPreset ?? SpiritCreator.CombatPreset.Default, right, left) is { } problem)
+        if (CombatPreset is { } preset && !Enum.IsDefined(preset))
+            throw new InvalidDataException("Unknown combat preset.");
+        if (left.Kind == WeaponKind.Catalyst)
+            throw new InvalidDataException("Equip catalysts in the right hand.");
+        if (!draft && CombatPresetChoice.LoadoutProblem(CombatPreset ?? SpiritCreator.CombatPreset.Default, right, left) is { } problem)
             throw new InvalidDataException(problem);
-        if (SpellCatalog.LoadoutProblem(CombatPreset, WeaponId, SpellIds, Attributes) is { } spellProblem)
+        if (SpellCatalog.LoadoutProblem(draft ? null : CombatPreset, WeaponId, SpellIds, draft ? null : Attributes) is { } spellProblem)
             throw new InvalidDataException(spellProblem);
-        if (ExtrasCatalog.LoadoutProblem(TalismanIds, Consumables) is { } extrasProblem)
+        if (ExtrasCatalog.LoadoutProblem(TalismanIds, Consumables, draft) is { } extrasProblem)
             throw new InvalidDataException(extrasProblem);
         WeaponUpgradeCatalog.Validate(right, RightAshOfWarId, RightAffinity, RightReinforcement);
         WeaponUpgradeCatalog.Validate(left, LeftAshOfWarId, LeftAffinity, LeftReinforcement);
@@ -94,6 +108,10 @@ public sealed record SpiritProfile
                     throw new InvalidDataException($"Unknown or incompatible {slot.ToString().ToLowerInvariant()} armor ID.");
         if (HpPercent is < MinPercent or > MaxPercent || DamagePercent is < MinPercent or > MaxPercent)
             throw new InvalidDataException($"HP and damage must each be between {MinPercent}% and {MaxPercent}%.");
+        if (OutgoingDamagePercent is { } outgoing && !OutgoingDamageOptions.Contains(outgoing))
+            throw new InvalidDataException("Choose a supported outgoing damage percentage.");
+        if (StockFaceId is < 0 || (StockFaceId is not null && Face is not null))
+            throw new InvalidDataException("Use either a stock face or an imported face.");
         if (Face is { } face)
         {
             if (!FaceMapping.Offsets.Keys.ToHashSet(StringComparer.Ordinal).SetEquals(face.Keys))

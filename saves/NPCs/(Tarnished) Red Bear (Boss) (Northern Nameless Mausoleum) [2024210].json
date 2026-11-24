@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "(Tarnished) Red",
+    "summonName": "(Tarnished) Red Bear",
+    "bodyType": 1,
+    "weaponId": 34040000,
+    "leftWeaponId": 68510000,
+    "rightReinforcement": 6,
+    "attributes": {
+      "vigor": 31,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 20,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 26,
+      "arcane": 30
+    },
+    "armor": {
+      "head": 5020000,
+      "chest": 5020100,
+      "hands": 5020200,
+      "legs": 5020300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      2006800
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024210,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

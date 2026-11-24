@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Maleigh Marais,",
+    "summonName": "Maleigh Marais, Shaded Castle Castellan",
+    "bodyType": 1,
+    "weaponId": 34080000,
+    "leftWeaponId": 5040000,
+    "leftAshOfWarId": 10100,
+    "rightReinforcement": 10,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 16,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 12,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 963100,
+      "hands": 963200,
+      "legs": 960300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      7220
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23720,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

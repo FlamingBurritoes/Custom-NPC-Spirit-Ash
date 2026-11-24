@@ -1,0 +1,47 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Human",
+    "summonName": "Human",
+    "bodyType": 1,
+    "weaponId": 33210000,
+    "leftWeaponId": 6020000,
+    "attributes": {
+      "vigor": 28,
+      "mind": 15,
+      "endurance": 21,
+      "strength": 15,
+      "dexterity": 16,
+      "intelligence": 24,
+      "faith": 14,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 640000,
+      "chest": 640100,
+      "hands": 640200,
+      "legs": 640300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [
+      5000
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23290,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

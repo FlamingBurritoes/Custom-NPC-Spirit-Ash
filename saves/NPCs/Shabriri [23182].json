@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Shabriri",
+    "summonName": "Shabriri",
+    "bodyType": 1,
+    "weaponId": 34080000,
+    "leftWeaponId": 9000000,
+    "leftAshOfWarId": 10100,
+    "rightReinforcement": 10,
+    "leftReinforcement": 5,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 11,
+      "dexterity": 15,
+      "intelligence": 10,
+      "faith": 20,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 150000,
+      "chest": 150100,
+      "hands": 150200,
+      "legs": 150300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23180,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

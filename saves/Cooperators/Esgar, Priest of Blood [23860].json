@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Esgar, Priest of",
+    "summonName": "Esgar, Priest of Blood",
+    "bodyType": 1,
+    "weaponId": 34080000,
+    "leftWeaponId": 1040000,
+    "rightReinforcement": 10,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 10,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 20,
+      "arcane": 16
+    },
+    "armor": {
+      "head": -1,
+      "chest": 320100,
+      "hands": -1,
+      "legs": 320300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [
+      6300,
+      7210
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23860,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

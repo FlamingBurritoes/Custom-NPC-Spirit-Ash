@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Scribe Corhyn",
+    "summonName": "Scribe Corhyn",
+    "bodyType": 1,
+    "weaponId": 34080000,
+    "leftWeaponId": 13010000,
+    "rightReinforcement": 5,
+    "leftReinforcement": 5,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 13,
+      "dexterity": 18,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 620000,
+      "chest": 620100,
+      "hands": -1,
+      "legs": 620300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      6421
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23510,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

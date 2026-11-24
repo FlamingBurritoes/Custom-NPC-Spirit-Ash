@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Fia\u0027s Champion 1",
+    "summonName": "Fia\u0027s Champion 1",
+    "bodyType": 1,
+    "weaponId": 23040000,
+    "leftWeaponId": 23150000,
+    "rightAshOfWarId": 70000,
+    "rightReinforcement": 18,
+    "leftReinforcement": 18,
+    "attributes": {
+      "vigor": 35,
+      "mind": 13,
+      "endurance": 15,
+      "strength": 45,
+      "dexterity": 44,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 440000,
+      "chest": 790100,
+      "hands": 1760200,
+      "legs": 1760300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23611,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

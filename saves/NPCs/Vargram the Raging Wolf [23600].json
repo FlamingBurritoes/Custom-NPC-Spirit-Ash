@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Vargram the Ragi",
+    "summonName": "Vargram the Raging Wolf",
+    "bodyType": 1,
+    "weaponId": 4070000,
+    "leftWeaponId": -1,
+    "rightReinforcement": 6,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 20,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 20,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 860000,
+      "chest": 860100,
+      "hands": 860200,
+      "legs": 860300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23600,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

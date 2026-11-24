@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Curseblade Meera",
+    "summonName": "Curseblade Meera",
+    "targetAshId": 2200000,
+    "targetBuddyRowId": 30000000,
+    "bodyType": 0,
+    "weaponId": 64520000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5210000,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

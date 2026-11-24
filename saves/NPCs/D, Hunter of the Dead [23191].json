@@ -1,0 +1,53 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "D, Hunter of the",
+    "summonName": "D, Hunter of the Dead",
+    "bodyType": 1,
+    "weaponId": 34040000,
+    "leftWeaponId": 2090000,
+    "rightReinforcement": 10,
+    "leftReinforcement": 1,
+    "attributes": {
+      "vigor": 21,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 19,
+      "dexterity": 19,
+      "intelligence": 17,
+      "faith": 22,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 600000,
+      "chest": 600100,
+      "hands": 600200,
+      "legs": 600300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      6750,
+      6820
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23190,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

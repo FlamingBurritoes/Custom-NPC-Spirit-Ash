@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Mimic Tear",
+    "summonName": "Mimic Tear",
+    "bodyType": 1,
+    "weaponId": -1,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 15,
+      "mind": 10,
+      "endurance": 14,
+      "strength": 20,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 660000,
+      "chest": 660100,
+      "hands": 660200,
+      "legs": 660300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 1,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Godrick Soldier",
+    "summonName": "Godrick Soldier",
+    "targetAshId": 250000,
+    "targetBuddyRowId": 25000000,
+    "bodyType": 1,
+    "weaponId": 2040000,
+    "leftWeaponId": 31130000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 16,
+      "dexterity": 10,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 1700000,
+      "chest": 1700100,
+      "hands": 1700200,
+      "legs": 1700300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

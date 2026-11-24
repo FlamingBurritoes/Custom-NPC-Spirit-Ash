@@ -2,7 +2,6 @@ using System.Diagnostics;
 using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media.Imaging;
 using Avalonia.Platform.Storage;
 
 namespace SpiritCreator.Desktop;
@@ -16,7 +15,6 @@ public sealed partial class MainWindow : Window
     private string? _me3;
     private bool _busy;
     private bool _ready;
-    private byte[]? _portraitRgba;
     private readonly Dictionary<int, List<int>> _spellLoadouts = [];
     private readonly List<ComboBox> _talismans = [];
     private readonly List<(ComboBox Item, NumericUpDown Quantity)> _consumables = [];
@@ -24,12 +22,25 @@ public sealed partial class MainWindow : Window
     private ComboBox[] ArmorInputs => [HeadArmor, ChestArmor, HandsArmor, LegsArmor];
     private CombatPresetChoice SelectedPreset => PresetBox.SelectedItem as CombatPresetChoice ?? CombatPresetChoice.Options[0];
     private int RightWeaponId => (Weapons.SelectedItem as WeaponChoice)?.Id ?? EquipmentCatalog.Empty;
+    private sealed record OutgoingDamageChoice(int Percent)
+    {
+        public override string ToString() => Percent switch
+        {
+            SpiritProfile.StockOutgoingDamagePercent => $"{Percent}% (stock penalty)",
+            100 => "100% (no penalty)",
+            _ => $"{Percent}%"
+        };
+    }
+    private static readonly OutgoingDamageChoice[] OutgoingDamageChoices =
+        SpiritProfile.OutgoingDamageOptions.Select(percent => new OutgoingDamageChoice(percent)).ToArray();
 
     public MainWindow()
     {
         InitializeComponent();
         Hp.Minimum = Damage.Minimum = SpiritProfile.MinPercent;
         Hp.Maximum = Damage.Maximum = SpiritProfile.MaxPercent;
+        OutgoingDamage.ItemsSource = OutgoingDamageChoices;
+        SelectOutgoingDamage(null);
         foreach (var input in StatInputs)
         {
             input.Minimum = NpcAttributes.Minimum;
@@ -105,59 +116,18 @@ public sealed partial class MainWindow : Window
 
     private async void Export(object? sender, RoutedEventArgs e)
     {
-        if (Weapons.SelectedItem is not WeaponChoice right || LeftWeapons.SelectedItem is not WeaponChoice left ||
-            TargetAshBox.SelectedItem is not AshTargetChoice target || TargetRowBox.SelectedItem is not AshSpawnChoice spawn ||
-            ReadAttributes() is not { } attributes)
-            return;
-        var armorIds = ArmorInputs.Select(input => (input.SelectedItem as ArmorChoice)?.Id ?? EquipmentCatalog.Empty).ToArray();
-        var armor = new ArmorLoadout(armorIds[0], armorIds[1], armorIds[2], armorIds[3]);
-        var rightAsh = SelectedAsh(RightAsh);
-        var leftAsh = SelectedAsh(LeftAsh);
-        var rightAffinity = SelectedAffinity(RightAffinity);
-        var leftAffinity = SelectedAffinity(LeftAffinity);
-        var rightLevel = SelectedLevel(RightReinforcement);
-        var leftLevel = SelectedLevel(LeftReinforcement);
-        var rightAmmo = (RightAmmo.SelectedItem as AmmoChoice)?.Id;
-        var leftAmmo = (LeftAmmo.SelectedItem as AmmoChoice)?.Id;
-        var shade = (ShadeBox.SelectedItem as ShadeChoice)?.Shade ?? CompanionShade.None;
-        var preset = SelectedPreset.Preset;
-        var summonName = SummonNameBox.Text?.Trim();
-        var portrait = _portraitRgba;
-        var spellIds = SpellLoadout(right.Id).ToArray();
-        var (talismanIds, consumables, validQuantities) = ReadExtras();
-        if (!validQuantities)
-            return;
         if (_regulation is not { } regulation)
         {
             Status.Text = "Open Tool paths and locate the stock Elden Ring regulation.bin.";
             return;
         }
-        if (Hp.Value is not { } hp || Damage.Value is not { } damage ||
-            hp != decimal.Truncate(hp) || damage != decimal.Truncate(damage))
-        {
-            Status.Text = $"Enter whole HP and damage percentages from {SpiritProfile.MinPercent} to {SpiritProfile.MaxPercent}.";
-            return;
-        }
-
-        var profile = _appearance with
-        {
-            WeaponId = right.Id, LeftWeaponId = left.Id, Attributes = attributes, Armor = armor,
-            RightAshOfWarId = rightAsh, LeftAshOfWarId = leftAsh,
-            RightAffinity = rightAffinity, LeftAffinity = leftAffinity,
-            RightReinforcement = rightLevel, LeftReinforcement = leftLevel,
-            RightAmmoId = rightAmmo, LeftAmmoId = leftAmmo,
-            Shade = shade, CombatPreset = preset, SpellIds = spellIds,
-            TalismanIds = talismanIds, Consumables = consumables,
-            SummonName = summonName,
-            TargetAshId = target.GoodsId, TargetBuddyRowId = spawn.RowId,
-            HpPercent = (int)hp, DamagePercent = (int)damage
-        };
         SetBusy(true);
-        Status.Text = portrait is null ? $"Exporting {profile.Character} at level {attributes.Level}…" :
-            "Exporting with portrait… Rebuilding the UI texture can take longer.";
         try
         {
-            _exportedProfile = await Task.Run(() => RegulationExporter.Export(profile, regulation, LocalPaths.NewExportFolder(), portrait));
+            var build = CaptureBuild();
+            var profile = build.ToExportProfile();
+            Status.Text = $"Exporting {profile.Character} at level {profile.Attributes!.Level}…";
+            _exportedProfile = await Task.Run(() => RegulationExporter.Export(profile, regulation, LocalPaths.NewExportFolder()));
             Status.Text = $"Exported {profile.Character}. Choose Launch offline when the game is closed.";
         }
         catch (Exception ex) when (ExpectedFailure(ex))
@@ -279,43 +249,6 @@ public sealed partial class MainWindow : Window
 
     private void TargetRowChanged(object? sender, SelectionChangedEventArgs e) => ResetExport();
 
-    private async void ImportPortrait(object? sender, RoutedEventArgs e)
-    {
-        SetBusy(true);
-        try
-        {
-            var path = await Pick("Import an Ashes portrait", "PNG or JPEG", ["*.png", "*.jpg", "*.jpeg"]);
-            if (path is null)
-                return;
-            var portrait = await Task.Run(() => PortraitImage.Load(path));
-            using var png = new MemoryStream(portrait.PreviewPng);
-            var preview = new Bitmap(png);
-            (PortraitPreview.Source as Bitmap)?.Dispose();
-            PortraitPreview.Source = preview;
-            PortraitPreview.IsVisible = true;
-            _portraitRgba = portrait.Rgba;
-            ResetExport();
-            Status.Text = "Portrait imported. Export the profile to use it in-game.";
-        }
-        catch (Exception ex) when (ExpectedFailure(ex))
-        {
-            Status.Text = $"Could not import portrait: {ex.Message}";
-        }
-        finally
-        {
-            SetBusy(false);
-        }
-    }
-
-    private void ClearPortrait(object? sender, RoutedEventArgs e)
-    {
-        var previous = PortraitPreview.Source as Bitmap;
-        PortraitPreview.Source = null;
-        previous?.Dispose();
-        PortraitPreview.IsVisible = false;
-        _portraitRgba = null;
-        ResetExport();
-    }
     private void PresetChanged(object? sender, SelectionChangedEventArgs e) => ResetExport();
 
     private List<int> SpellLoadout(int weaponId)
@@ -478,6 +411,11 @@ public sealed partial class MainWindow : Window
         AmmoPanel.IsVisible = RightAmmoRow.IsVisible || LeftAmmoRow.IsVisible;
     }
     private void TuningChanged(object? sender, NumericUpDownValueChangedEventArgs e) => ResetExport();
+    private void OutgoingDamageChanged(object? sender, SelectionChangedEventArgs e) => ResetExport();
+
+    private void SelectOutgoingDamage(int? value) =>
+        OutgoingDamage.SelectedItem = OutgoingDamageChoices.Single(choice =>
+            choice.Percent == (value ?? SpiritProfile.StockOutgoingDamagePercent));
 
     private static bool Matches(string name, string? query) =>
         name.Replace('’', '\'').Contains((query ?? "").Trim().Replace('’', '\''), StringComparison.OrdinalIgnoreCase);
@@ -497,6 +435,7 @@ public sealed partial class MainWindow : Window
             box.SelectedItem = previous;
         }
 
+        var wasReady = _ready;
         _ready = false;
         try
         {
@@ -515,9 +454,10 @@ public sealed partial class MainWindow : Window
         }
         finally
         {
-            _ready = true;
+            _ready = wasReady;
         }
-        Refresh();
+        if (_ready)
+            Refresh();
     }
 
     private void BuildExtrasControls()
@@ -561,19 +501,20 @@ public sealed partial class MainWindow : Window
         }
     }
 
-    private (int[] Talismans, ConsumableStack[] Items, bool ValidQuantities) ReadExtras()
+    private (int[] Talismans, ConsumableStack?[] Slots, bool ValidQuantities) ReadExtras()
     {
         var talismans = _talismans.Select(box => (box.SelectedItem as TalismanChoice)?.Id ?? EquipmentCatalog.Empty).ToArray();
-        var items = new List<ConsumableStack>();
-        foreach (var (box, quantity) in _consumables)
+        var slots = new ConsumableStack?[_consumables.Count];
+        for (var i = 0; i < slots.Length; ++i)
         {
+            var (box, quantity) = _consumables[i];
             if (box.SelectedItem is not ConsumableChoice { Id: >= 0 } item)
                 continue;
             if (quantity.Value is not { } value || value != decimal.Truncate(value) || value < 1 || value > item.MaxQuantity)
                 return (talismans, [], false);
-            items.Add(new(item.Id, (int)value));
+            slots[i] = new(item.Id, (int)value);
         }
-        return (talismans, items.ToArray(), true);
+        return (talismans, slots, true);
     }
 
     private void ResetExport()
@@ -647,6 +588,8 @@ public sealed partial class MainWindow : Window
     private void Refresh()
     {
         Busy.IsVisible = _busy;
+        SaveBuildButton.IsEnabled = LoadBuildButton.IsEnabled = !_busy;
+        OutgoingDamage.IsEnabled = !_busy;
         ImportButton.IsEnabled = Weapons.IsEnabled = LeftWeapons.IsEnabled = Hp.IsEnabled = Damage.IsEnabled = ShadeBox.IsEnabled =
             GameButton.IsEnabled = Me3Button.IsEnabled = !_busy;
         PresetBox.IsEnabled = !_busy;
@@ -659,11 +602,9 @@ public sealed partial class MainWindow : Window
         TargetDetails.Text = target?.GoodsId == 233000
             ? "Rats use a different group of rows at +0–+4, +5–+9, and +10. Choose a row for your Ash’s upgrade level."
             : target?.Rows.Count > 1
-            ? "Only the selected row is replaced. The item name and icon apply to the whole Ash."
+            ? "Only the selected row is replaced. The item name applies to the whole Ash."
             : "This Ash has one spawn row.";
         LaunchInstructions.Text = $"Use {target?.Name ?? "the selected Ash"} on SpiritCreatorTest.sl2. Quit Elden Ring before launching a different profile.";
-        ImportPortraitButton.IsEnabled = !_busy;
-        ClearPortraitButton.IsEnabled = !_busy && _portraitRgba is not null;
         var validName = SpiritProfile.IsValidSummonName(SummonNameBox.Text);
         SummonNameProblem.IsVisible = !validName;
         SummonNameProblem.Text = "Use plain text without angle brackets or control characters.";
@@ -682,7 +623,8 @@ public sealed partial class MainWindow : Window
             quantity.IsEnabled = !_busy && item.SelectedItem is ConsumableChoice { Id: >= 0 };
         }
         var (talismanIds, consumables, validQuantities) = ReadExtras();
-        var extrasProblem = validQuantities ? ExtrasCatalog.LoadoutProblem(talismanIds, consumables) : "Enter a whole quantity for each selected item.";
+        var extrasProblem = validQuantities ? ExtrasCatalog.LoadoutProblem(talismanIds, consumables.OfType<ConsumableStack>().ToArray()) :
+            "Enter a whole quantity for each selected item.";
         ExtrasProblem.IsVisible = extrasProblem is not null;
         ExtrasProblem.Text = extrasProblem;
         Characters.IsEnabled = !_busy && _savePath is not null && Characters.ItemCount > 0;
@@ -709,10 +651,12 @@ public sealed partial class MainWindow : Window
         RefreshSpellControls(RightWeaponId);
         SpellProblem.IsVisible = spellProblem is not null;
         SpellProblem.Text = spellProblem;
-        AppearanceLabel.Text = _appearance.Face is null
-            ? "Active: Elden Ring’s default Type A appearance"
+        AppearanceLabel.Text = _appearance.StockFaceId is not null ? $"Active: {_appearance.Character} (stock NPC appearance)" :
+            _appearance.Face is null
+            ? $"Active: Elden Ring’s default Type {(_appearance.BodyType == 1 ? "A" : "B")} appearance"
             : $"Active: {_appearance.Character} (imported appearance)";
-        DefaultAppearanceButton.IsEnabled = !_busy && _appearance.Face is not null;
+        DefaultAppearanceButton.IsEnabled = !_busy &&
+            (_appearance.Face is not null || _appearance.StockFaceId is not null || _appearance.BodyType != 1);
         ExportButton.IsEnabled = !_busy && right is not null &&
             left is not null && stats is not null && meetsRequirements && validName && row is not null;
         LaunchButton.IsEnabled = !_busy && _exportedProfile is not null;

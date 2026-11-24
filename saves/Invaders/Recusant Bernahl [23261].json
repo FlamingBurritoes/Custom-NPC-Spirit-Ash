@@ -1,0 +1,53 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Recusant Bernahl",
+    "summonName": "Recusant Bernahl",
+    "bodyType": 1,
+    "weaponId": 34000000,
+    "leftWeaponId": 12200000,
+    "rightReinforcement": 10,
+    "leftReinforcement": 2,
+    "attributes": {
+      "vigor": 31,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 24,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 35,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 720000,
+      "chest": 721100,
+      "hands": 720200,
+      "legs": 720300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      6340,
+      6600
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23260,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

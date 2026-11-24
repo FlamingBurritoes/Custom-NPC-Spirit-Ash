@@ -1,0 +1,52 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Juno Hoslow, Kni",
+    "summonName": "Juno Hoslow, Knight of Blood",
+    "bodyType": 1,
+    "weaponId": 20050000,
+    "leftWeaponId": 20050000,
+    "rightAshOfWarId": 80100,
+    "leftAshOfWarId": 80100,
+    "rightReinforcement": 9,
+    "leftReinforcement": 9,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 15,
+      "strength": 10,
+      "dexterity": 24,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 650000,
+      "chest": 650100,
+      "hands": 650200,
+      "legs": 650300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23470,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

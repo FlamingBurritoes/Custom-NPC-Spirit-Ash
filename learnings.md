@@ -143,3 +143,19 @@ Compared the decoded `NpcThinkParam` row bytes, excluding the row headers/IDs. T
 
 - The stock Wretch character-creation preview rows (`CharaInitParam` 3118 and 3119) point to `FaceParam` rows of the same IDs. Those faces are byte-identical to the Warrior base templates 1000 and 2000, respectively. Character creation uses these same faces across the class previews. In this PARAM, Type A is `1` and Type B is `0`.
 - With no imported face, export links to the verified stock row and leaves `FaceParam` untouched. Selecting a save slot captures the supported appearance immediately. Later exports use that snapshot without reading the save again; the default and imported appearance both fit in the existing JSON profile schema.
+
+## Build files and overhead nameplates
+
+- Desktop build JSON stores a versioned editable profile, quick-item slot positions, and alternate catalyst spell lists. It is not an ME3 launch profile. Loading does not read the original save, and missing spawn selection or unmet combat prerequisites do not stop draft saves. Export still validates the actual loadout.
+
+## Preset library
+
+- The preset generator enumerates stock map-linked player-model characters plus named NPC and Spirit Ash initializers. The index reports each row, role, substitution, and omission. Separate-model NPCs and humanoid ashes use a curated equipment manifest, not their original rigs or movesets.
+- Presets link to stock `FaceParam` rows directly. This preserves the original stock data without embedding faces in the JSON or restricting the game’s stock faces to the save importer’s field subset.
+- Portrait import and export were removed. The inventory atlas is only read for stock thumbnails. Version 1 build files with old portrait data still load, but that field is dropped on the next save.
+
+## Spirit outgoing damage and health display
+
+- Nepheli Puppet's `NpcParam` uses special effect `296000` in slot 27. It sets ten outgoing damage multipliers (physical, magic, fire, lightning, and holy, each against player and enemy targets) to 0.25. Its incoming damage modifiers (0.5) and poise damage modifier (0.05) are separate. The editor copies the effect for the custom summon and only replaces the outgoing multipliers. The existing HP and attack-power adjustments still act on the Ash reinforcement effects.
+- The stock Spirit Ash HUD has HP values and a character handle, but is separate from the cooperator tag that tracks an on-screen position. No file-only, per-spirit option to force a persistent overhead bar was verified. No HUD or team changes are exported.
+- Rogier’s Margit summon is a map entity activated by a gold NPC summon sign. That flow supplies a name ID to the cooperator system, which populates the friendly overhead tag and handles line of sight. The Ashes workflow uses `BuddyParam` and the separate HP-only spirit display. The current export supplies `NpcParam.nameId` and English text but does not register a cooperator; no file-only method was verified to add a friendly tag while retaining the Ash workflow. Team changes were not shipped as a cosmetic workaround.

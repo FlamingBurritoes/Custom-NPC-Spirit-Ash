@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Sorceress Sellen",
+    "summonName": "Sorceress Sellen",
+    "bodyType": 0,
+    "weaponId": 33210000,
+    "leftWeaponId": -1,
+    "rightReinforcement": 6,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 10,
+      "dexterity": 20,
+      "intelligence": 52,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 830100,
+      "hands": 830200,
+      "legs": 830300
+    },
+    "shade": "None",
+    "combatPreset": "Sorcerer",
+    "spellIds": [
+      4020,
+      4210,
+      4500,
+      4510
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23160,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

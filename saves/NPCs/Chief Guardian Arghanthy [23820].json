@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Chief Guardian A",
+    "summonName": "Chief Guardian Arghanthy",
+    "bodyType": 1,
+    "weaponId": 34020000,
+    "leftWeaponId": 32150000,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 31,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 36,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 28,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 963100,
+      "hands": 963200,
+      "legs": 960300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      6000,
+      6120,
+      6220
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23820,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

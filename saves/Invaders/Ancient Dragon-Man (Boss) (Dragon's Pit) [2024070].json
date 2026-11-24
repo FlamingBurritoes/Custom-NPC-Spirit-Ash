@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Ancient Dragon-M",
+    "summonName": "Ancient Dragon-Man",
+    "bodyType": 1,
+    "weaponId": 34080000,
+    "leftWeaponId": 66510000,
+    "attributes": {
+      "vigor": 38,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 16,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 24,
+      "arcane": 16
+    },
+    "armor": {
+      "head": -1,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      7010,
+      7080
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024070,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

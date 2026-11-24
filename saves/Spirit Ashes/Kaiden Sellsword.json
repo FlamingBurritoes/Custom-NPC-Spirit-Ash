@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Kaiden Sellsword",
+    "summonName": "Kaiden Sellsword",
+    "targetAshId": 231000,
+    "targetBuddyRowId": 23100000,
+    "bodyType": 1,
+    "weaponId": 8020000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 19,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 50000,
+      "chest": 50100,
+      "hands": 50200,
+      "legs": 50300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

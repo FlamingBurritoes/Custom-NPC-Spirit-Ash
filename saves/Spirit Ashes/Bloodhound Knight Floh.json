@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Bloodhound Knigh",
+    "summonName": "Bloodhound Knight Floh",
+    "targetAshId": 239000,
+    "targetBuddyRowId": 23900000,
+    "bodyType": 1,
+    "weaponId": 8030000,
+    "leftWeaponId": 22020000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 18,
+      "dexterity": 17,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 790000,
+      "chest": 790100,
+      "hands": 790200,
+      "legs": 790300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

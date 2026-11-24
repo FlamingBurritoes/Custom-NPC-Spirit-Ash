@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Moongrum, Carian",
+    "summonName": "Moongrum, Carian Knight",
+    "bodyType": 1,
+    "weaponId": 2180000,
+    "leftWeaponId": 31190000,
+    "leftAshOfWarId": 30500,
+    "rightReinforcement": 2,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 12,
+      "dexterity": 20,
+      "intelligence": 18,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 980000,
+      "chest": 980100,
+      "hands": 980200,
+      "legs": 980300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23590,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Dung Eater Puppe",
+    "summonName": "Dung Eater Puppet",
+    "targetAshId": 260000,
+    "targetBuddyRowId": 26000000,
+    "bodyType": 1,
+    "weaponId": 3160000,
+    "leftWeaponId": -1,
+    "rightReinforcement": 2,
+    "attributes": {
+      "vigor": 38,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 28,
+      "dexterity": 28,
+      "intelligence": 20,
+      "faith": 20,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 970000,
+      "chest": 970100,
+      "hands": 970200,
+      "legs": 970300
+    },
+    "shade": "Puppet",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      1210,
+      1080,
+      1090,
+      -1
+    ],
+    "stockFaceId": 23230,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Madding Hand",
+    "summonName": "Madding Hand",
+    "bodyType": 1,
+    "weaponId": 34090000,
+    "leftWeaponId": 21530000,
+    "attributes": {
+      "vigor": 22,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 22,
+      "intelligence": 13,
+      "faith": 20,
+      "arcane": 20
+    },
+    "armor": {
+      "head": -1,
+      "chest": 5230100,
+      "hands": 5230200,
+      "legs": 5230300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      7310
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024290,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

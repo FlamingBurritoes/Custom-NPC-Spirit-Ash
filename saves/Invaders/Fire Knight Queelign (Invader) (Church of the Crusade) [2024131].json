@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Fire Knight Quee",
+    "summonName": "Fire Knight Queelign",
+    "bodyType": 1,
+    "weaponId": 34510000,
+    "leftWeaponId": 6500000,
+    "leftAshOfWarId": 414000,
+    "attributes": {
+      "vigor": 22,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 22,
+      "intelligence": 25,
+      "faith": 25,
+      "arcane": 30
+    },
+    "armor": {
+      "head": -1,
+      "chest": 5181100,
+      "hands": 5180200,
+      "legs": 5180300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      2007800
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024130,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

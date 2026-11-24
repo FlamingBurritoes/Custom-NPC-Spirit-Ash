@@ -1,0 +1,54 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "White Mask Varr\u00E9",
+    "summonName": "White Mask Varr\u00E9",
+    "bodyType": 1,
+    "weaponId": 34000000,
+    "leftWeaponId": 11060000,
+    "rightReinforcement": 4,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 14,
+      "arcane": 24
+    },
+    "armor": {
+      "head": 680000,
+      "chest": 680100,
+      "hands": 680200,
+      "legs": 680300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [
+      6000,
+      6320,
+      7210
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23010,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 2
+    },
+    null,
+    null
+  ]
+}

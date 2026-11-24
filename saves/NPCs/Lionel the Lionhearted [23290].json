@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Lionel the Lionh",
+    "summonName": "Lionel the Lionhearted",
+    "bodyType": 1,
+    "weaponId": 33180000,
+    "leftWeaponId": 6020000,
+    "leftAshOfWarId": 10900,
+    "rightReinforcement": 10,
+    "leftReinforcement": 8,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 16,
+      "dexterity": 16,
+      "intelligence": 23,
+      "faith": 18,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 640000,
+      "chest": 640100,
+      "hands": 640200,
+      "legs": 640300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      5000,
+      5020
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23290,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

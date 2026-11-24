@@ -1,0 +1,46 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Inquisitor Ghiza",
+    "summonName": "Inquisitor Ghiza",
+    "bodyType": 1,
+    "weaponId": 23100000,
+    "leftWeaponId": -1,
+    "rightReinforcement": 6,
+    "attributes": {
+      "vigor": 22,
+      "mind": 14,
+      "endurance": 11,
+      "strength": 28,
+      "dexterity": 18,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 964000,
+      "chest": 964100,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23840,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

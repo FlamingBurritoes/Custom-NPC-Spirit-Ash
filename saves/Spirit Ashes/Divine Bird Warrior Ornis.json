@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Divine Bird Warr",
+    "summonName": "Divine Bird Warrior Ornis",
+    "targetAshId": 2213000,
+    "targetBuddyRowId": 31400000,
+    "bodyType": 1,
+    "weaponId": 7530000,
+    "leftWeaponId": 7530000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 11,
+      "dexterity": 14,
+      "intelligence": 10,
+      "faith": 14,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5253000,
+      "chest": 5253100,
+      "hands": 5253200,
+      "legs": 5253300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

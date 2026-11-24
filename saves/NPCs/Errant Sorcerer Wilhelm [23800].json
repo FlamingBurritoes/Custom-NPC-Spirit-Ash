@@ -1,0 +1,54 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Errant Sorcerer",
+    "summonName": "Errant Sorcerer Wilhelm",
+    "bodyType": 1,
+    "weaponId": 33280000,
+    "leftWeaponId": -1,
+    "rightReinforcement": 6,
+    "attributes": {
+      "vigor": 28,
+      "mind": 10,
+      "endurance": 14,
+      "strength": 10,
+      "dexterity": 20,
+      "intelligence": 43,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 990100,
+      "hands": 990200,
+      "legs": 990300
+    },
+    "shade": "None",
+    "combatPreset": "Sorcerer",
+    "spellIds": [
+      4090,
+      4220,
+      4600,
+      4620
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23800,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

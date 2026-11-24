@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Cleanrot Knight",
+    "summonName": "Cleanrot Knight Finlay",
+    "targetAshId": 223000,
+    "targetBuddyRowId": 22300000,
+    "bodyType": 0,
+    "weaponId": 5010000,
+    "leftWeaponId": 19020000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 13,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 15,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 340000,
+      "chest": 340100,
+      "hands": 340200,
+      "legs": 340300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

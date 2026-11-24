@@ -11,15 +11,14 @@ public static class RegulationExporter
     private const int Nepheli = 25900000, CustomRow = 99000;
     private const int EffectStart = 900000, StockEffectStart = 290050;
     private const int CustomNpc = 100000021, ShadeEffect = 900011, ShadeVfx = 900000;
+    private const int StockSpiritDamageEffect = 296000, SpiritDamageEffect = 900012, SpiritDamageSlot = 532;
     private const int MimicThink = 100000010;
     private const int RightCustomWeapon = 900000, LeftCustomWeapon = 900001;
     private static readonly int[] DamageRates = [72, 76, 80, 84, 480];
 
-    public static string Export(SpiritProfile profile, string regulation, string output, byte[]? portraitRgba = null)
+    public static string Export(SpiritProfile profile, string regulation, string output)
     {
         profile.Validate();
-        Require(portraitRgba is null || portraitRgba.Length == SummonPortrait.RgbaBytes,
-            "The portrait must be a 160 × 160 RGBA image.");
         output = Path.TrimEndingDirectorySeparator(Path.GetFullPath(output));
         var parent = Path.GetDirectoryName(output) ?? throw new ArgumentException("Choose a new output folder, not a drive root.");
         if (Directory.Exists(output) || File.Exists(output))
@@ -132,7 +131,12 @@ public static class RegulationExporter
         init[228] = profile.BodyType;
         var importedFace = profile.Face;
         byte[]? face = null;
-        if (importedFace is null)
+        if (profile.StockFaceId is { } stockFace)
+        {
+            Require(faces.Contains(stockFace), $"Stock face {stockFace} is unavailable.");
+            Write32(init, 164, stockFace);
+        }
+        else if (importedFace is null)
         {
             // Stock Wretch character-creation preview initializers. Their faces are
             // byte-identical to the Warrior base templates (1000 / 2000).
@@ -203,7 +207,9 @@ public static class RegulationExporter
         var effects = new RegulationParam(original.Table("SpEffectParam"), "SP_EFFECT_PARAM_ST", 912);
         var effectRows = new Dictionary<int, byte[]>();
         var bias = CombatPresetChoice.BiasEffect(profile.CombatPreset);
-        if (profile.Shade != CompanionShade.Puppet || bias is not null || name is not null)
+        var outgoing = profile.OutgoingDamagePercent ?? SpiritProfile.StockOutgoingDamagePercent;
+        var adjustSpiritDamage = outgoing != SpiritProfile.StockOutgoingDamagePercent;
+        if (profile.Shade != CompanionShade.Puppet || bias is not null || name is not null || adjustSpiritDamage)
         {
             const int puppetColor = 295200, puppetParticles = 295201, whiteColor = 295000;
             const int colorSlot = 528, particlesSlot = 520, biasSlot = 516, primaryVfx = 368;
@@ -225,6 +231,23 @@ public static class RegulationExporter
                 Require(I32(npc, biasSlot) == -1 && effects.Contains(effectId),
                     "Unexpected stock AI bias effect or occupied NPC effect slot.");
                 Write32(npc, biasSlot, effectId);
+            }
+            if (adjustSpiritDamage)
+            {
+                Require(I32(npc, SpiritDamageSlot) == StockSpiritDamageEffect && !effects.Contains(SpiritDamageEffect) &&
+                        !npcs.Ids.Any(id => I32(npcs.Row(id), SpiritDamageSlot) == SpiritDamageEffect),
+                    "Unexpected stock spirit damage effect or private row collision.");
+                var adjustment = effects.Row(StockSpiritDamageEffect).ToArray();
+                // Five outgoing damage channels each for player and enemy targets.
+                // Keep the incoming damage reduction and poise penalty on the same row.
+                for (var offset = 652; offset <= 688; offset += sizeof(float))
+                {
+                    var field = adjustment.AsSpan(offset, sizeof(float));
+                    Require(BinaryPrimitives.ReadSingleLittleEndian(field) == 0.25f, "Unexpected stock outgoing damage rate.");
+                    BinaryPrimitives.WriteSingleLittleEndian(field, outgoing / 100f);
+                }
+                effectRows.Add(SpiritDamageEffect, adjustment);
+                Write32(npc, SpiritDamageSlot, SpiritDamageEffect);
             }
             // Puppet particles do not provide the shade, but should not carry over to non-puppet looks.
             if (profile.Shade != CompanionShade.Puppet)
@@ -302,15 +325,6 @@ public static class RegulationExporter
         {
             Directory.CreateDirectory(Path.Combine(staging, "mod"));
             File.WriteAllBytes(Path.Combine(staging, "mod", "regulation.bin"), package);
-            if (portraitRgba is not null)
-            {
-                var iconPath = Path.Combine(staging, "mod", SummonPortrait.RelativePath);
-                Directory.CreateDirectory(Path.GetDirectoryName(iconPath)!);
-                var icons = Enumerable.Range(0, 11)
-                    .Select(level => BinaryPrimitives.ReadUInt16LittleEndian(goods.Row(target.GoodsId + level)[48..]))
-                    .Distinct().Select(id => (int)id).ToArray();
-                File.WriteAllBytes(iconPath, SummonPortrait.Export(gameFolder, portraitRgba, icons));
-            }
             if (messages is not null)
             {
                 var messageDirectory = Path.Combine(staging, "mod", "msg", "engus");

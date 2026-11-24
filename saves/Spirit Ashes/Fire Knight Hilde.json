@@ -1,0 +1,42 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Fire Knight Hild",
+    "summonName": "Fire Knight Hilde",
+    "targetAshId": 2203000,
+    "targetBuddyRowId": 30300000,
+    "bodyType": 0,
+    "weaponId": 34510000,
+    "leftWeaponId": 4520000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 22,
+      "dexterity": 18,
+      "intelligence": 10,
+      "faith": 23,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5180000,
+      "chest": 5180100,
+      "hands": 5180200,
+      "legs": 5180300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [
+      2007800
+    ],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Messmer Soldier",
+    "summonName": "Messmer Soldier",
+    "targetAshId": 2207000,
+    "targetBuddyRowId": 30800000,
+    "bodyType": 1,
+    "weaponId": 17510000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 19,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5140000,
+      "chest": 5140100,
+      "hands": 5140200,
+      "legs": 5140300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

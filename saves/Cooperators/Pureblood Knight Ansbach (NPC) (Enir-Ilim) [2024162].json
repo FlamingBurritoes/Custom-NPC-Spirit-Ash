@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Pureblood Knight",
+    "summonName": "Pureblood Knight Ansbach",
+    "bodyType": 1,
+    "weaponId": 34070000,
+    "leftWeaponId": 19500000,
+    "attributes": {
+      "vigor": 31,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 25,
+      "intelligence": 10,
+      "faith": 40,
+      "arcane": 30
+    },
+    "armor": {
+      "head": 5110000,
+      "chest": 5110100,
+      "hands": 5110200,
+      "legs": 5110300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [
+      2006300
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024160,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

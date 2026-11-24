@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Bloody Finger Ra",
+    "summonName": "Bloody Finger Ravenmount Assassin",
+    "bodyType": 1,
+    "weaponId": 22030000,
+    "leftWeaponId": -1,
+    "rightAshOfWarId": 80200,
+    "rightReinforcement": 8,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 26,
+      "strength": 10,
+      "dexterity": 27,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 930000,
+      "chest": 930100,
+      "hands": 930200,
+      "legs": 930300
+    },
+    "shade": "Invader",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23400,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

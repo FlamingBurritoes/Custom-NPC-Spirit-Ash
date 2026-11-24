@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Greater Potentat",
+    "summonName": "Greater Potentate",
+    "bodyType": 1,
+    "weaponId": 15510000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 22,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 16,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 15
+    },
+    "armor": {
+      "head": 5070000,
+      "chest": -1,
+      "hands": -1,
+      "legs": -1
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024280,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

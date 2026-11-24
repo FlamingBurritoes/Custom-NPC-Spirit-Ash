@@ -1,0 +1,52 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Polyanna, Adopte",
+    "summonName": "Polyanna, Adopted Daughter",
+    "bodyType": 0,
+    "weaponId": 34080000,
+    "leftWeaponId": 1160000,
+    "rightReinforcement": 7,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 10,
+      "dexterity": 20,
+      "intelligence": 10,
+      "faith": 20,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": -1,
+      "hands": 1950200,
+      "legs": -1
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [
+      7200
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23900,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 2
+    },
+    null,
+    null
+  ]
+}

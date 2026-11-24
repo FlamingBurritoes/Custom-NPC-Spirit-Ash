@@ -1,0 +1,52 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Sorcerer Rogier",
+    "summonName": "Sorcerer Rogier",
+    "bodyType": 1,
+    "weaponId": 33130000,
+    "leftWeaponId": 5030000,
+    "leftAshOfWarId": 20000,
+    "rightReinforcement": 10,
+    "leftReinforcement": 10,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 10,
+      "dexterity": 24,
+      "intelligence": 17,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 130000,
+      "chest": 130100,
+      "hands": 130200,
+      "legs": 130300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [
+      4000,
+      4370,
+      4460
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23250,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

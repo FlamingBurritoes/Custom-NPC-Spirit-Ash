@@ -1,0 +1,38 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Messmer",
+    "summonName": "Messmer",
+    "bodyType": 1,
+    "weaponId": 17500000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 14,
+      "dexterity": 35,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5220000,
+      "chest": 5220100,
+      "hands": 5220200,
+      "legs": 5220300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

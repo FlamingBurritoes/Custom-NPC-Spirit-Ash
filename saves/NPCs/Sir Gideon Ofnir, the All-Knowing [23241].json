@@ -1,0 +1,53 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Sir Gideon Ofnir",
+    "summonName": "Sir Gideon Ofnir, the All-Knowing",
+    "bodyType": 1,
+    "weaponId": 34000000,
+    "leftWeaponId": 11110000,
+    "rightReinforcement": 8,
+    "attributes": {
+      "vigor": 31,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 12,
+      "dexterity": 20,
+      "intelligence": 29,
+      "faith": 42,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 590000,
+      "chest": 590100,
+      "hands": 590200,
+      "legs": 590300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      6240,
+      6701,
+      6760
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23240,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

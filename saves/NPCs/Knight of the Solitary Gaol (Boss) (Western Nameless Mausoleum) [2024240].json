@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Knight of the So",
+    "summonName": "Knight of the Solitary Gaol",
+    "bodyType": 1,
+    "weaponId": 3550000,
+    "leftWeaponId": 43500000,
+    "leftAmmoId": 52020000,
+    "attributes": {
+      "vigor": 31,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 27,
+      "dexterity": 15,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 11
+    },
+    "armor": {
+      "head": 5130000,
+      "chest": 5130100,
+      "hands": 5130200,
+      "legs": 5130300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024240,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

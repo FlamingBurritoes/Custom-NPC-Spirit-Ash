@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Old Knight Istva",
+    "summonName": "Old Knight Istvan",
+    "bodyType": 1,
+    "weaponId": 8020000,
+    "leftWeaponId": -1,
+    "rightAshOfWarId": 20900,
+    "rightReinforcement": 6,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 19,
+      "dexterity": 16,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 80000,
+      "chest": 80100,
+      "hands": 80200,
+      "legs": 80300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23450,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

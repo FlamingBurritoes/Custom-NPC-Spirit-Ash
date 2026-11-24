@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Igon",
+    "summonName": "Igon",
+    "bodyType": 1,
+    "weaponId": 34080000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 24,
+      "dexterity": 18,
+      "intelligence": 10,
+      "faith": 28,
+      "arcane": 32
+    },
+    "armor": {
+      "head": 5100000,
+      "chest": -1,
+      "hands": 5100200,
+      "legs": -1
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024032,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

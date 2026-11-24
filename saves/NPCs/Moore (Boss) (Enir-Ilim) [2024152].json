@@ -1,0 +1,51 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Moore",
+    "summonName": "Moore",
+    "bodyType": 1,
+    "weaponId": 32520000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 31,
+      "mind": 15,
+      "endurance": 30,
+      "strength": 49,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 15
+    },
+    "armor": {
+      "head": 5010000,
+      "chest": 5010100,
+      "hands": 5010200,
+      "legs": 5010300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024150,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 2000670,
+      "quantity": 10
+    },
+    {
+      "id": 50203,
+      "quantity": 1
+    },
+    null
+  ]
+}

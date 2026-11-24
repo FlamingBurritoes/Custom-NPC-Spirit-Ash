@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Black Knight Com",
+    "summonName": "Black Knight Commander Andreas",
+    "targetAshId": 2208000,
+    "targetBuddyRowId": 30900000,
+    "bodyType": 1,
+    "weaponId": 12520000,
+    "leftWeaponId": 32500000,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 35,
+      "dexterity": 11,
+      "intelligence": 10,
+      "faith": 17,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 5150000,
+      "chest": 5150100,
+      "hands": 5150200,
+      "legs": 5150300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

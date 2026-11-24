@@ -1,0 +1,45 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Swordhand of Nig",
+    "summonName": "Swordhand of Night Anna",
+    "bodyType": 0,
+    "weaponId": 22500000,
+    "leftWeaponId": 21550000,
+    "attributes": {
+      "vigor": 27,
+      "mind": 15,
+      "endurance": 30,
+      "strength": 15,
+      "dexterity": 30,
+      "intelligence": 18,
+      "faith": 18,
+      "arcane": 15
+    },
+    "armor": {
+      "head": 5090000,
+      "chest": 5090100,
+      "hands": 5090200,
+      "legs": 5090300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024120,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

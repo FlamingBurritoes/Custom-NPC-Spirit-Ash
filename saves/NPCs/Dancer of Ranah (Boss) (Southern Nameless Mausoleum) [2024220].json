@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Dancer of Ranah",
+    "summonName": "Dancer of Ranah",
+    "bodyType": 0,
+    "weaponId": 7520000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 40,
+      "mind": 15,
+      "endurance": 30,
+      "strength": 15,
+      "dexterity": 38,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 11
+    },
+    "armor": {
+      "head": 5080000,
+      "chest": 5080100,
+      "hands": 5080200,
+      "legs": 5080300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024220,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

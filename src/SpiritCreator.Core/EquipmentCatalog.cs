@@ -6,7 +6,8 @@ public sealed record NpcAttributes(int Vigor = 10, int Mind = 10, int Endurance 
     public const int Minimum = 10, Maximum = 99;
     [System.Text.Json.Serialization.JsonIgnore]
     public int Level => 1 + Values.Sum(stat => stat - Minimum);
-    internal int[] Values => [Vigor, Mind, Endurance, Strength, Dexterity, Intelligence, Faith, Arcane];
+    [System.Text.Json.Serialization.JsonIgnore]
+    public int[] Values => [Vigor, Mind, Endurance, Strength, Dexterity, Intelligence, Faith, Arcane];
 
     internal void Validate()
     {
@@ -41,7 +42,8 @@ public enum ArmorSlot { Head, Chest, Hands, Legs }
 
 public sealed record ArmorLoadout(int Head = -1, int Chest = -1, int Hands = -1, int Legs = -1)
 {
-    internal int[] Ids => [Head, Chest, Hands, Legs];
+    [System.Text.Json.Serialization.JsonIgnore]
+    public int[] Ids => [Head, Chest, Hands, Legs];
 }
 
 public sealed record ArmorChoice(int Id, string Name, ArmorSlot Slot)

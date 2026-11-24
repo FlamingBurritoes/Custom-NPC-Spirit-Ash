@@ -1,0 +1,40 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Black Knife Tich",
+    "summonName": "Black Knife Tiche",
+    "targetAshId": 200000,
+    "targetBuddyRowId": 20000000,
+    "bodyType": 0,
+    "weaponId": 1010000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 12,
+      "intelligence": 10,
+      "faith": 18,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 180000,
+      "chest": 180100,
+      "hands": 180200,
+      "legs": 180300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

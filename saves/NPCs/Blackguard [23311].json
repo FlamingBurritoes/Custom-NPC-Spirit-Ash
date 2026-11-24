@@ -1,0 +1,53 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Blackguard",
+    "summonName": "Blackguard",
+    "bodyType": 1,
+    "weaponId": 21070000,
+    "leftWeaponId": -1,
+    "rightAshOfWarId": 65400,
+    "rightReinforcement": 7,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 16,
+      "strength": 24,
+      "dexterity": 23,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 891000,
+      "chest": -1,
+      "hands": -1,
+      "legs": 890300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23310,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    {
+      "id": 820,
+      "quantity": 1
+    },
+    null
+  ]
+}

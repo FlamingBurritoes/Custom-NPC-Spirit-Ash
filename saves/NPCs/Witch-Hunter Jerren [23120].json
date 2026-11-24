@@ -1,0 +1,50 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Witch-Hunter Jer",
+    "summonName": "Witch-Hunter Jerren",
+    "bodyType": 1,
+    "weaponId": 33170000,
+    "leftWeaponId": 3050000,
+    "leftAshOfWarId": 21400,
+    "rightReinforcement": 10,
+    "leftReinforcement": 9,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 18,
+      "intelligence": 22,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 940000,
+      "chest": 940100,
+      "hands": 940200,
+      "legs": 940300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [
+      4390
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23120,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Preceptor Miriam",
+    "summonName": "Preceptor Miriam",
+    "bodyType": 0,
+    "weaponId": 33200000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 31,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 10,
+      "dexterity": 20,
+      "intelligence": 28,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": -1,
+      "chest": 910100,
+      "hands": 910200,
+      "legs": 910300
+    },
+    "shade": "Invader",
+    "combatPreset": "Sorcerer",
+    "spellIds": [
+      4380,
+      4370
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23520,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

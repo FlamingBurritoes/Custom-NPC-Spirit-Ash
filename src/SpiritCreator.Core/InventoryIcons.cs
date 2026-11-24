@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using BCnEncoder.Decoder;
 using BCnEncoder.Shared;
 using static SpiritCreator.RegulationBinary;
-using static SpiritCreator.SummonPortrait;
+using static SpiritCreator.StockIconAtlas;
 
 namespace SpiritCreator;
 
@@ -15,6 +15,7 @@ public readonly record struct InventoryItem(InventoryKind Kind, int Id);
 // No game images are bundled, exported, or written to a cache on disk.
 public sealed class InventoryIcons
 {
+    public const int IconSize = Size;
     private sealed record Tile(byte[] Blocks, int Width, int Height, int X, int Y);
     private readonly Dictionary<InventoryItem, int> _ids;
     private readonly Dictionary<int, Tile> _tiles;

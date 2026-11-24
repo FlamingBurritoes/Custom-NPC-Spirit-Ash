@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Inaba, Disciple",
+    "summonName": "Inaba, Disciple of Okina",
+    "bodyType": 1,
+    "weaponId": 9000000,
+    "leftWeaponId": 1100000,
+    "rightAshOfWarId": 60600,
+    "rightReinforcement": 7,
+    "leftReinforcement": 8,
+    "attributes": {
+      "vigor": 22,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 11,
+      "dexterity": 21,
+      "intelligence": 10,
+      "faith": 10,
+      "arcane": 20
+    },
+    "armor": {
+      "head": 870000,
+      "chest": 872100,
+      "hands": 872200,
+      "legs": 872300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23670,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

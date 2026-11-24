@@ -1,0 +1,49 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Logur, the Beast",
+    "summonName": "Logur, the Beast Claw",
+    "bodyType": 1,
+    "weaponId": 68500000,
+    "leftWeaponId": -1,
+    "rightAshOfWarId": 407000,
+    "attributes": {
+      "vigor": 22,
+      "mind": 15,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 22,
+      "intelligence": 10,
+      "faith": 25,
+      "arcane": 30
+    },
+    "armor": {
+      "head": -1,
+      "chest": -1,
+      "hands": 5070200,
+      "legs": 5070300
+    },
+    "shade": "None",
+    "combatPreset": "Default",
+    "spellIds": [],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 2024310,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    {
+      "id": 50201,
+      "quantity": 1
+    },
+    null,
+    null
+  ]
+}

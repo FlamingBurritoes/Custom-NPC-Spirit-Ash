@@ -1,0 +1,43 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Battlemage Hugue",
+    "summonName": "Battlemage Hugues",
+    "targetAshId": 221000,
+    "targetBuddyRowId": 22100000,
+    "bodyType": 1,
+    "weaponId": 33200000,
+    "leftWeaponId": -1,
+    "attributes": {
+      "vigor": 10,
+      "mind": 10,
+      "endurance": 10,
+      "strength": 10,
+      "dexterity": 10,
+      "intelligence": 28,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 1000000,
+      "chest": 1000100,
+      "hands": 1000200,
+      "legs": 1000300
+    },
+    "shade": "SpiritAsh",
+    "combatPreset": "Default",
+    "spellIds": [
+      4080,
+      4120
+    ],
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}

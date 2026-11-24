@@ -1,0 +1,48 @@
+{
+  "buildVersion": 1,
+  "profile": {
+    "schemaVersion": 1,
+    "regulationVersion": "11730034",
+    "character": "Castellan Jerren",
+    "summonName": "Castellan Jerren",
+    "bodyType": 1,
+    "weaponId": 33200000,
+    "leftWeaponId": 3050000,
+    "leftAshOfWarId": 21400,
+    "attributes": {
+      "vigor": 45,
+      "mind": 10,
+      "endurance": 11,
+      "strength": 15,
+      "dexterity": 14,
+      "intelligence": 28,
+      "faith": 10,
+      "arcane": 10
+    },
+    "armor": {
+      "head": 940000,
+      "chest": 940100,
+      "hands": 940200,
+      "legs": 940300
+    },
+    "shade": "Cooperator",
+    "combatPreset": "Default",
+    "spellIds": [
+      4390
+    ],
+    "talismanIds": [
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "stockFaceId": 23120,
+    "hpPercent": 100,
+    "damagePercent": 100
+  },
+  "quickItems": [
+    null,
+    null,
+    null
+  ]
+}
