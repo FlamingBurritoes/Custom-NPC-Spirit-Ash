@@ -122,7 +122,8 @@ public static class SaveAppearance
         var profile = new SpiritProfile
         {
             SchemaVersion = 1, RegulationVersion = SpiritProfile.Regulation, Character = name,
-            BodyType = body, WeaponId = SpiritProfile.JawboneAxe, Face = mapped
+            BodyType = body, WeaponId = EquipmentCatalog.Club, LeftWeaponId = EquipmentCatalog.Empty,
+            Attributes = new(), Armor = new(), Face = mapped
         };
         profile.Validate();
         return profile;

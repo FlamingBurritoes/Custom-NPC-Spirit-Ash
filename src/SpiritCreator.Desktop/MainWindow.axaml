@@ -1,7 +1,8 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:SpiritCreator.Desktop"
         x:Class="SpiritCreator.Desktop.MainWindow"
-        Title="Elden Ring Spirit Creator" Width="680" Height="770" MinWidth="490" MinHeight="525"
+        Title="Elden Ring Spirit Creator" Width="760" Height="850" MinWidth="590" MinHeight="525"
         WindowStartupLocation="CenterScreen">
   <Window.Styles>
     <Style Selector="TextBlock.muted">
@@ -17,6 +18,9 @@
     <Style Selector="TextBlock.section">
       <Setter Property="FontSize" Value="17" />
       <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="StackPanel.equip > ComboBox">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
     </Style>
   </Window.Styles>
   <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
@@ -41,10 +45,127 @@
       </Border>
       <Border Classes="card">
         <StackPanel Spacing="8">
-          <TextBlock Classes="section" Text="2. Set up your companion" />
-          <ComboBox x:Name="Weapons" AutomationProperties.Name="Weapon" HorizontalAlignment="Stretch"
-                    SelectionChanged="WeaponChanged" />
-          <TextBlock Classes="muted" Text="The summon uses this weapon in both hands. Your character’s gear and stats are not imported." />
+          <TextBlock Classes="section" Text="2. Combat preset" />
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <ComboBox x:Name="PresetBox" AutomationProperties.Name="Combat preset"
+                      HorizontalAlignment="Stretch" SelectionChanged="PresetChanged" />
+            <Button x:Name="StarterGearButton" Grid.Column="1" Content="Apply starter gear" Click="ApplyStarterGear" />
+          </Grid>
+          <TextBlock x:Name="PresetDescription" Classes="muted" />
+          <TextBlock Classes="muted" Text="Starter gear replaces both hands and resets their skills, affinities, and reinforcement. It does not change attributes, armor, shade, or tuning." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="section" Text="3. Attributes" />
+            <TextBlock x:Name="LevelLabel" Grid.Column="1" FontWeight="SemiBold"
+                       AutomationProperties.LiveSetting="Polite" Text="Level 1" />
+          </Grid>
+          <TextBlock Classes="muted" Text="Wretch starts at 10 in every attribute. A blank resets to 10; each extra point adds one level." />
+          <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="8">
+            <StackPanel Spacing="3"><TextBlock Text="Vigor" /><local:AttributeInput x:Name="Vigor" AutomationProperties.Name="Vigor" ValueChanged="TuningChanged" /></StackPanel>
+            <StackPanel Grid.Column="1" Spacing="3"><TextBlock Text="Mind" /><local:AttributeInput x:Name="Mind" AutomationProperties.Name="Mind" ValueChanged="TuningChanged" /></StackPanel>
+            <StackPanel Grid.Column="2" Spacing="3"><TextBlock Text="Endurance" /><local:AttributeInput x:Name="Endurance" AutomationProperties.Name="Endurance" ValueChanged="TuningChanged" /></StackPanel>
+            <StackPanel Grid.Column="3" Spacing="3"><TextBlock Text="Strength" /><local:AttributeInput x:Name="Strength" AutomationProperties.Name="Strength" ValueChanged="TuningChanged" /></StackPanel>
+            <StackPanel Grid.Row="1" Spacing="3"><TextBlock Text="Dexterity" /><local:AttributeInput x:Name="Dexterity" AutomationProperties.Name="Dexterity" ValueChanged="TuningChanged" /></StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Spacing="3"><TextBlock Text="Intelligence" /><local:AttributeInput x:Name="Intelligence" AutomationProperties.Name="Intelligence" ValueChanged="TuningChanged" /></StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="2" Spacing="3"><TextBlock Text="Faith" /><local:AttributeInput x:Name="Faith" AutomationProperties.Name="Faith" ValueChanged="TuningChanged" /></StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="3" Spacing="3"><TextBlock Text="Arcane" /><local:AttributeInput x:Name="Arcane" AutomationProperties.Name="Arcane" ValueChanged="TuningChanged" /></StackPanel>
+          </Grid>
+        </StackPanel>
+      </Border>
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section" Text="4. Equipment" />
+          <TextBox x:Name="WeaponSearch" Watermark="Search weapons in both hands" TextChanged="EquipmentSearchChanged" />
+          <TextBox x:Name="ArmorSearch" Watermark="Search all armor slots" TextChanged="EquipmentSearchChanged" />
+          <TextBox x:Name="AshSearch" Watermark="Search Ashes of War in both hands" TextChanged="EquipmentSearchChanged" />
+          <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
+            <StackPanel Classes="equip" Spacing="3">
+              <TextBlock Text="Right hand" /><ComboBox x:Name="Weapons" AutomationProperties.Name="Right-hand weapon" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Right-hand Ash of War" />
+              <ComboBox x:Name="RightAsh" AutomationProperties.Name="Right-hand Ash of War" SelectionChanged="AshChanged" />
+              <TextBlock Text="Affinity (infusion)" />
+              <ComboBox x:Name="RightAffinity" AutomationProperties.Name="Right-hand affinity" SelectionChanged="UpgradeChanged" />
+              <TextBlock Text="Reinforcement" />
+              <ComboBox x:Name="RightReinforcement" AutomationProperties.Name="Right-hand reinforcement" SelectionChanged="UpgradeChanged" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Classes="equip" Spacing="3">
+              <TextBlock Text="Left hand" /><ComboBox x:Name="LeftWeapons" AutomationProperties.Name="Left-hand weapon" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Left-hand Ash of War" />
+              <ComboBox x:Name="LeftAsh" AutomationProperties.Name="Left-hand Ash of War" SelectionChanged="AshChanged" />
+              <TextBlock Text="Affinity (infusion)" />
+              <ComboBox x:Name="LeftAffinity" AutomationProperties.Name="Left-hand affinity" SelectionChanged="UpgradeChanged" />
+              <TextBlock Text="Reinforcement" />
+              <ComboBox x:Name="LeftReinforcement" AutomationProperties.Name="Left-hand reinforcement" SelectionChanged="UpgradeChanged" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Classes="equip" Spacing="3">
+              <TextBlock Text="Head" /><ComboBox x:Name="HeadArmor" AutomationProperties.Name="Head armor" SelectionChanged="WeaponChanged" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Classes="equip" Spacing="3">
+              <TextBlock Text="Chest" /><ComboBox x:Name="ChestArmor" AutomationProperties.Name="Chest armor" SelectionChanged="WeaponChanged" />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Classes="equip" Spacing="3">
+              <TextBlock Text="Hands" /><ComboBox x:Name="HandsArmor" AutomationProperties.Name="Hand armor" SelectionChanged="WeaponChanged" />
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" Classes="equip" Spacing="3">
+              <TextBlock Text="Legs" /><ComboBox x:Name="LegsArmor" AutomationProperties.Name="Leg armor" SelectionChanged="WeaponChanged" />
+            </StackPanel>
+          </Grid>
+          <TextBlock x:Name="RequirementsLabel" Classes="muted" AutomationProperties.LiveSetting="Polite" />
+          <StackPanel x:Name="AmmoPanel" Spacing="5" IsVisible="False">
+            <TextBox x:Name="AmmoSearch" Watermark="Search ammunition for both hands" TextChanged="EquipmentSearchChanged" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+              <ComboBox x:Name="RightAmmo" HorizontalAlignment="Stretch" AutomationProperties.Name="Right-hand ammunition" SelectionChanged="UpgradeChanged" />
+              <ComboBox x:Name="LeftAmmo" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Left-hand ammunition" SelectionChanged="UpgradeChanged" />
+            </Grid>
+          </StackPanel>
+          <TextBlock Classes="muted" Text="Affinity choices depend on the weapon and Ash of War. Reinforcement is separate from the Spirit Ash’s upgrade level. The AI may not use the selected skill." />
+          <StackPanel x:Name="SpellPanel" Spacing="6" IsVisible="False">
+            <TextBlock x:Name="SpellHeading" FontWeight="SemiBold" />
+            <TextBox x:Name="SpellSearch" Watermark="Search sorceries" AutomationProperties.Name="Search sorceries"
+                     TextChanged="SpellSearchChanged" />
+            <TextBox x:Name="IncantationSearch" Watermark="Search incantations" AutomationProperties.Name="Search incantations"
+                     TextChanged="SpellSearchChanged" />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+              <ComboBox x:Name="SpellPicker" PlaceholderText="Choose a spell" HorizontalAlignment="Stretch"
+                        AutomationProperties.Name="Available spells" SelectionChanged="SpellSelectionChanged" />
+              <Button x:Name="AddSpellButton" Grid.Column="1" Content="Add spell" Click="AddSpell" />
+            </Grid>
+            <TextBlock x:Name="SpellRequirements" Classes="muted" />
+            <ListBox x:Name="EquippedSpells" MaxHeight="185" AutomationProperties.Name="Equipped spells"
+                     SelectionChanged="SpellSelectionChanged" />
+            <WrapPanel Orientation="Horizontal" ItemSpacing="10" LineSpacing="6">
+              <Button x:Name="RemoveSpellButton" Content="Remove selected" Click="RemoveSpell" />
+              <Button x:Name="RestoreSpellsButton" Content="Restore starter spells" Click="RestoreSpells" />
+            </WrapPanel>
+            <TextBlock x:Name="SpellProblem" Classes="muted" AutomationProperties.LiveSetting="Polite" />
+            <TextBlock Classes="muted" Text="Range labels show AI categories, not exact distances. Spell order is not a priority setting." />
+          </StackPanel>
+          <Expander Header="Talismans and consumables" HorizontalAlignment="Stretch">
+            <StackPanel Margin="0,8,0,0" Spacing="8">
+              <TextBlock Classes="muted" Text="Talismans are passive gear. Consumables are optional; the AI decides when to use them. Effects and item use still need in-game testing." />
+              <TextBlock Text="Talismans" FontWeight="SemiBold" />
+              <TextBox x:Name="TalismanSearch" Watermark="Search all talisman slots" TextChanged="EquipmentSearchChanged" />
+              <StackPanel x:Name="TalismanSlots" Spacing="5" />
+              <TextBlock Text="Quick items and quantities" FontWeight="SemiBold" />
+              <TextBox x:Name="ItemSearch" Watermark="Search all quick-item slots" TextChanged="EquipmentSearchChanged" />
+              <StackPanel x:Name="ConsumableSlots" Spacing="5" />
+              <TextBlock x:Name="ExtrasProblem" Classes="muted" AutomationProperties.LiveSetting="Polite" />
+            </StackPanel>
+          </Expander>
+        </StackPanel>
+      </Border>
+      <Border Classes="card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section" Text="5. Appearance and combat tuning" />
+          <StackPanel Spacing="4">
+            <TextBlock Text="Companion shade" />
+            <ComboBox x:Name="ShadeBox" AutomationProperties.Name="Companion shade"
+                      HorizontalAlignment="Stretch" SelectionChanged="ShadeChanged" />
+            <TextBlock Classes="muted" Text="Cosmetic only. The companion stays friendly with any shade." />
+          </StackPanel>
           <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
             <StackPanel Spacing="4">
               <TextBlock Text="HP (%)" />
@@ -62,7 +183,7 @@
       </Border>
       <Border Classes="card">
         <StackPanel Spacing="8">
-          <TextBlock Classes="section" Text="3. Export and play offline" />
+          <TextBlock Classes="section" Text="6. Export and play offline" />
           <WrapPanel Orientation="Horizontal" ItemSpacing="10" LineSpacing="8">
             <Button x:Name="ExportButton" Content="Export offline profile" Click="Export" IsEnabled="False" />
             <Button x:Name="LaunchButton" Content="Launch offline" Click="Launch" IsEnabled="False" />
