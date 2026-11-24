@@ -27,20 +27,38 @@
     <StackPanel Margin="28,24" Spacing="16">
       <StackPanel Spacing="4">
         <TextBlock Text="Elden Ring Spirit Creator" FontWeight="SemiBold" FontSize="28" TextWrapping="Wrap" />
-        <TextBlock Classes="muted" Text="Offline alpha · Elden Ring 1.17.3 · Spirit Jellyfish Ashes" />
+        <TextBlock Classes="muted" Text="Offline alpha · Elden Ring 1.17.3" />
       </StackPanel>
       <Border Classes="card">
         <StackPanel Spacing="10">
-          <TextBlock Classes="section" Text="1. Import a character" />
-          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
-            <Button x:Name="ImportButton" Content="Import save…" Click="ImportSave" />
-            <TextBlock x:Name="SaveLabel" Grid.Column="1" Classes="muted" VerticalAlignment="Center"
-                       TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Text="No save selected" />
-          </Grid>
+          <TextBlock Classes="section" Text="1. Character appearance (optional)" />
+          <TextBlock x:Name="AppearanceLabel" Classes="muted" AutomationProperties.LiveSetting="Polite" />
+          <WrapPanel ItemSpacing="8" LineSpacing="4">
+            <Button x:Name="ImportButton" Content="Import appearance from save…" Click="ImportSave" />
+            <Button x:Name="DefaultAppearanceButton" Content="Use default appearance" Click="UseDefaultAppearance" IsEnabled="False" />
+          </WrapPanel>
+          <TextBlock x:Name="SaveLabel" Classes="muted" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"
+                     IsVisible="False" />
           <ComboBox x:Name="Characters" AutomationProperties.Name="Character slot"
                     PlaceholderText="Choose a character slot" HorizontalAlignment="Stretch"
                     SelectionChanged="CharacterChanged" IsEnabled="False" />
-          <TextBlock Classes="muted" Text="Save files are read-only. Steam IDs and full save paths aren’t displayed or stored by the app." />
+          <TextBlock Classes="muted" Text="No save is needed to build or export. Import copies only the character’s appearance; the original save is read-only." />
+        </StackPanel>
+      </Border>
+      <Border Classes="card">
+        <StackPanel Spacing="6">
+          <TextBlock Classes="section" Text="Replacement target" />
+          <TextBlock Text="Spirit Ash to replace" />
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+            <Image x:Name="TargetAshIcon" />
+            <ComboBox x:Name="TargetAshBox" Grid.Column="1" AutomationProperties.Name="Spirit Ash to replace"
+                      HorizontalAlignment="Stretch" SelectionChanged="TargetAshChanged" />
+          </Grid>
+          <TextBlock Text="Spawn row to replace" />
+          <ComboBox x:Name="TargetRowBox" AutomationProperties.Name="Spawn row to replace"
+                    HorizontalAlignment="Stretch" SelectionChanged="TargetRowChanged" />
+          <TextBlock x:Name="TargetDetails" Classes="muted" />
+          <TextBlock Classes="muted" Text="Mimic Tear is excluded because it uses a special player-copying spawn." />
         </StackPanel>
       </Border>
       <Border Classes="card">
@@ -78,47 +96,84 @@
       <Border Classes="card">
         <StackPanel Spacing="8">
           <TextBlock Classes="section" Text="4. Equipment" />
+          <TextBlock x:Name="IconStatus" Classes="muted" IsVisible="False" />
           <TextBox x:Name="WeaponSearch" Watermark="Search weapons in both hands" TextChanged="EquipmentSearchChanged" />
           <TextBox x:Name="ArmorSearch" Watermark="Search all armor slots" TextChanged="EquipmentSearchChanged" />
           <TextBox x:Name="AshSearch" Watermark="Search Ashes of War in both hands" TextChanged="EquipmentSearchChanged" />
           <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
             <StackPanel Classes="equip" Spacing="3">
-              <TextBlock Text="Right hand" /><ComboBox x:Name="Weapons" AutomationProperties.Name="Right-hand weapon" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Right hand" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="RightWeaponIcon" />
+                <ComboBox x:Name="Weapons" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Right-hand weapon" SelectionChanged="WeaponChanged" />
+              </Grid>
               <TextBlock Text="Right-hand Ash of War" />
-              <ComboBox x:Name="RightAsh" AutomationProperties.Name="Right-hand Ash of War" SelectionChanged="AshChanged" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="RightAshIcon" />
+                <ComboBox x:Name="RightAsh" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Right-hand Ash of War" SelectionChanged="AshChanged" />
+              </Grid>
               <TextBlock Text="Affinity (infusion)" />
               <ComboBox x:Name="RightAffinity" AutomationProperties.Name="Right-hand affinity" SelectionChanged="UpgradeChanged" />
               <TextBlock Text="Reinforcement" />
               <ComboBox x:Name="RightReinforcement" AutomationProperties.Name="Right-hand reinforcement" SelectionChanged="UpgradeChanged" />
             </StackPanel>
             <StackPanel Grid.Column="1" Classes="equip" Spacing="3">
-              <TextBlock Text="Left hand" /><ComboBox x:Name="LeftWeapons" AutomationProperties.Name="Left-hand weapon" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Left hand" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="LeftWeaponIcon" />
+                <ComboBox x:Name="LeftWeapons" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Left-hand weapon" SelectionChanged="WeaponChanged" />
+              </Grid>
               <TextBlock Text="Left-hand Ash of War" />
-              <ComboBox x:Name="LeftAsh" AutomationProperties.Name="Left-hand Ash of War" SelectionChanged="AshChanged" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="LeftAshIcon" />
+                <ComboBox x:Name="LeftAsh" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Left-hand Ash of War" SelectionChanged="AshChanged" />
+              </Grid>
               <TextBlock Text="Affinity (infusion)" />
               <ComboBox x:Name="LeftAffinity" AutomationProperties.Name="Left-hand affinity" SelectionChanged="UpgradeChanged" />
               <TextBlock Text="Reinforcement" />
               <ComboBox x:Name="LeftReinforcement" AutomationProperties.Name="Left-hand reinforcement" SelectionChanged="UpgradeChanged" />
             </StackPanel>
             <StackPanel Grid.Row="1" Classes="equip" Spacing="3">
-              <TextBlock Text="Head" /><ComboBox x:Name="HeadArmor" AutomationProperties.Name="Head armor" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Head" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="HeadIcon" />
+                <ComboBox x:Name="HeadArmor" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Head armor" SelectionChanged="WeaponChanged" />
+              </Grid>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Classes="equip" Spacing="3">
-              <TextBlock Text="Chest" /><ComboBox x:Name="ChestArmor" AutomationProperties.Name="Chest armor" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Chest" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="ChestIcon" />
+                <ComboBox x:Name="ChestArmor" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Chest armor" SelectionChanged="WeaponChanged" />
+              </Grid>
             </StackPanel>
             <StackPanel Grid.Row="2" Classes="equip" Spacing="3">
-              <TextBlock Text="Hands" /><ComboBox x:Name="HandsArmor" AutomationProperties.Name="Hand armor" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Hands" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="HandsIcon" />
+                <ComboBox x:Name="HandsArmor" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Hand armor" SelectionChanged="WeaponChanged" />
+              </Grid>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Classes="equip" Spacing="3">
-              <TextBlock Text="Legs" /><ComboBox x:Name="LegsArmor" AutomationProperties.Name="Leg armor" SelectionChanged="WeaponChanged" />
+              <TextBlock Text="Legs" />
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="LegsIcon" />
+                <ComboBox x:Name="LegsArmor" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Leg armor" SelectionChanged="WeaponChanged" />
+              </Grid>
             </StackPanel>
           </Grid>
           <TextBlock x:Name="RequirementsLabel" Classes="muted" AutomationProperties.LiveSetting="Polite" />
           <StackPanel x:Name="AmmoPanel" Spacing="5" IsVisible="False">
             <TextBox x:Name="AmmoSearch" Watermark="Search ammunition for both hands" TextChanged="EquipmentSearchChanged" />
             <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-              <ComboBox x:Name="RightAmmo" HorizontalAlignment="Stretch" AutomationProperties.Name="Right-hand ammunition" SelectionChanged="UpgradeChanged" />
-              <ComboBox x:Name="LeftAmmo" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Left-hand ammunition" SelectionChanged="UpgradeChanged" />
+              <Grid x:Name="RightAmmoRow" ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="RightAmmoIcon" />
+                <ComboBox x:Name="RightAmmo" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Right-hand ammunition" SelectionChanged="UpgradeChanged" />
+              </Grid>
+              <Grid x:Name="LeftAmmoRow" Grid.Column="1" ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                <Image x:Name="LeftAmmoIcon" />
+                <ComboBox x:Name="LeftAmmo" Grid.Column="1" HorizontalAlignment="Stretch" AutomationProperties.Name="Left-hand ammunition" SelectionChanged="UpgradeChanged" />
+              </Grid>
             </Grid>
           </StackPanel>
           <TextBlock Classes="muted" Text="Affinity choices depend on the weapon and Ash of War. Reinforcement is separate from the Spirit Ash’s upgrade level. The AI may not use the selected skill." />
@@ -128,14 +183,18 @@
                      TextChanged="SpellSearchChanged" />
             <TextBox x:Name="IncantationSearch" Watermark="Search incantations" AutomationProperties.Name="Search incantations"
                      TextChanged="SpellSearchChanged" />
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-              <ComboBox x:Name="SpellPicker" PlaceholderText="Choose a spell" HorizontalAlignment="Stretch"
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+              <Image x:Name="SpellIcon" />
+              <ComboBox x:Name="SpellPicker" Grid.Column="1" PlaceholderText="Choose a spell" HorizontalAlignment="Stretch"
                         AutomationProperties.Name="Available spells" SelectionChanged="SpellSelectionChanged" />
-              <Button x:Name="AddSpellButton" Grid.Column="1" Content="Add spell" Click="AddSpell" />
+              <Button x:Name="AddSpellButton" Grid.Column="2" Content="Add spell" Click="AddSpell" />
             </Grid>
             <TextBlock x:Name="SpellRequirements" Classes="muted" />
-            <ListBox x:Name="EquippedSpells" MaxHeight="185" AutomationProperties.Name="Equipped spells"
-                     SelectionChanged="SpellSelectionChanged" />
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+              <Image x:Name="EquippedSpellIcon" />
+              <ListBox x:Name="EquippedSpells" Grid.Column="1" MaxHeight="185" AutomationProperties.Name="Equipped spells"
+                       SelectionChanged="SpellSelectionChanged" />
+            </Grid>
             <WrapPanel Orientation="Horizontal" ItemSpacing="10" LineSpacing="6">
               <Button x:Name="RemoveSpellButton" Content="Remove selected" Click="RemoveSpell" />
               <Button x:Name="RestoreSpellsButton" Content="Restore starter spells" Click="RestoreSpells" />
@@ -160,6 +219,26 @@
       <Border Classes="card">
         <StackPanel Spacing="8">
           <TextBlock Classes="section" Text="5. Appearance and combat tuning" />
+          <StackPanel Spacing="4">
+            <TextBlock Text="Summon name" />
+            <TextBox x:Name="SummonNameBox" AutomationProperties.Name="Summon name"
+                     Watermark="Leave blank to keep the original Ash name" MaxLength="40" TextChanged="SummonNameChanged" />
+            <TextBlock Classes="muted" Text="Renames the summon and its Ashes in English (US). A custom name requires the installed Game folder." />
+            <TextBlock x:Name="SummonNameProblem" Classes="muted" AutomationProperties.LiveSetting="Polite" />
+          </StackPanel>
+          <StackPanel Spacing="4">
+            <TextBlock Text="Ashes portrait (optional)" />
+            <Grid ColumnDefinitions="Auto,*">
+               <Image x:Name="PortraitPreview" Width="160" Height="160" Margin="0,0,10,0" IsVisible="False" />
+              <StackPanel Grid.Column="1" Spacing="4">
+                <WrapPanel ItemSpacing="8" LineSpacing="4">
+                  <Button x:Name="ImportPortraitButton" Content="Import portrait…" Click="ImportPortrait" />
+                  <Button x:Name="ClearPortraitButton" Content="Remove" Click="ClearPortrait" IsEnabled="False" />
+                </WrapPanel>
+                <TextBlock Classes="muted" Text="PNG or JPEG. Center-cropped to replace the regular Ashes icon. Needs the installed Game folder and adds about 65 MB to the export." />
+              </StackPanel>
+            </Grid>
+          </StackPanel>
           <StackPanel Spacing="4">
             <TextBlock Text="Companion shade" />
             <ComboBox x:Name="ShadeBox" AutomationProperties.Name="Companion shade"
@@ -188,7 +267,7 @@
             <Button x:Name="ExportButton" Content="Export offline profile" Click="Export" IsEnabled="False" />
             <Button x:Name="LaunchButton" Content="Launch offline" Click="Launch" IsEnabled="False" />
           </WrapPanel>
-          <TextBlock Classes="muted" Text="Use Spirit Jellyfish Ashes on SpiritCreatorTest.sl2. Quit Elden Ring before launching a different profile." />
+          <TextBlock x:Name="LaunchInstructions" Classes="muted" />
           <Expander Header="Tool paths" HorizontalAlignment="Stretch">
             <Grid Margin="0,8,0,0" ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="6">
               <TextBlock x:Name="GameLabel" Classes="muted" VerticalAlignment="Center" />
@@ -200,7 +279,7 @@
         </StackPanel>
       </Border>
       <ProgressBar x:Name="Busy" IsIndeterminate="True" IsVisible="False" />
-      <TextBlock x:Name="Status" Text="Select an Elden Ring save to get started." TextWrapping="Wrap"
+       <TextBlock x:Name="Status" Text="Using the default appearance. Configure equipment or import a character’s look." TextWrapping="Wrap"
                  AutomationProperties.LiveSetting="Polite" />
     </StackPanel>
   </ScrollViewer>

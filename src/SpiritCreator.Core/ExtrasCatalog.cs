@@ -57,8 +57,6 @@ public static class ExtrasCatalog
         new(1700, "Throwing Dagger", 10, 10000001, 10170000, 1)
     });
 
-    public static IReadOnlyList<int> LegacyTalismans { get; } = Array.AsReadOnly(new[] { 1210, 2130 });
-
     public static string? LoadoutProblem(IReadOnlyList<int>? talismans, IReadOnlyList<ConsumableStack>? items)
     {
         if (talismans is not null)

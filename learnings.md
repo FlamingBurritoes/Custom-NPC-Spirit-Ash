@@ -114,7 +114,32 @@ Compared the decoded `NpcThinkParam` row bytes, excluding the row headers/IDs. T
 
 ## Talismans and quick items
 
+- New exports default to four empty talisman slots even when the source initializer had equipment. Explicit talismans are still supported.
+
 - Stock humanoid NPC initializers use `equip_Accessory01` through `_04` at offsets 64–76. Nepheli Puppet starts with Bull-Goat’s `1210` and Axe `2130`; Dung Eater Puppet equips three talismans. The export uses normal equipment slots and validates each stock accessory’s passive-effect reference. It does not force a separate NPC passive effect or assume all conditional bonuses behave the same on a summon.
 - Quick items use `item_01` through `_10` at offsets 124–160 with counts at 204–213. The editor supports up to three types, while the export clears unused quick slots and preserves the template's secondary items (including three Talisman Pouches).
 - Reference goal `29999` scans quick and secondary item slots, filters by `EquipParamGoods.aiUseJudgeId`, and picks eligible items for a throw, heal, or buff action. Ordinary player Crimson/Cerulean flask rows lack this usage ID. The NPC Crimson Flask `50201` is used by vanilla Patches and Nepheli's co-op initializer; it points to `19391`, a stock 30%-of-max-HP heal. The reference action weights suppress that healing action at or above half HP, but a lower HP value does not guarantee a use. Cerulean is also unnecessary with the template's infinite-FP effect.
 - Item and talisman edits are private to the custom initializer. Automated readback checked IDs, stack quantities, empty slots, and that the shared AI, accessory, and goods tables remain unchanged. In-game item use, actual consumption, and passive effects are still unverified for our summon.
+
+## Summon name and portrait
+
+- For a custom name, the exporter reads the three English item message bundles directly from the stock Game directory's `Data0` archive. Each bundle has a base `GoodsName` table containing Jellyfish IDs `236000` through `236010`. The export replaces those entries, preserving the upgrade suffix, and adds a private entry in `NpcName`. Only the cloned `NpcParam` row uses that name ID. It does not touch the vanilla Nepheli Puppet, installed assets, or the Ash item ID, icon, or description.
+- All eleven names and the private NPC name were checked in each rebuilt bundle. In-game text display still needs a check, particularly the name that appears with the summoned NPC's health bar.
+- Stock `EquipParamGoods` uses icon ID `111` at all Jellyfish upgrade levels. Optional PNG/JPEG import center-crops to 160 × 160 and replaces just the BC7 blocks for that icon in `SB_Icon_00` in the stock high-detail common texture archive. The separate `MENU_Knowledge_00111` item-detail image remains stock. Disabled portrait exports contain no texture override.
+- The [stock spirit HP display](https://docs.rs/eldenring/latest/src/eldenring/cs/fe_man.rs.html) uses a different HUD data structure from friendly overhead tags and does not have a name field. The private `NpcParam.nameId` link is not enough to add a HUD label. Neither HUD assets nor team behavior are changed for this feature.
+
+## Selecting a replacement target
+
+- `AshTargets.tsv` indexes 83 base-game and DLC ashes with 151 selectable `BuddyParam` rows. The stock goods row's effect reference, not its item ID or a guessed row number, links it to the spawn rows. This matters for DLC ashes and for Jolán and Anna, whose rows have different leading numbers. Mimic Tear's special copy flow is excluded.
+- Export retains the selected row ID and trigger, uses the existing humanoid puppet template for spawning and reinforcement, and retains the stock position and facing for non-Jellyfish targets. It leaves all other Buddy rows and the item costs and upgrade paths untouched.
+- Giant Rat Ashes use separate trigger families at +0–+4, +5–+9, and +10. Rows are labeled with their level range in the editor. Rat icons also vary with the upgrade tier. Portrait export patches each stock icon used by the selected item; text export renames the selected item in the base or DLC name table as appropriate.
+
+## Inventory images
+
+- The editor looks up stock icon IDs in each item's PARAM table, then crops the corresponding inventory tile from the verified Data0 UI atlas. Spell art comes from the matching `EquipParamGoods` row, not the `Magic` row. Armor uses the first available of the two stock icon variants.
+- The app retains only the compressed tiles for catalog entries and decodes selected images on demand. Entries without stock artwork stay blank. No icons are written to disk or added to exports. `--icons` exercises the stock lookup and BC7 readback.
+
+## Optional appearance
+
+- The stock Wretch character-creation preview rows (`CharaInitParam` 3118 and 3119) point to `FaceParam` rows of the same IDs. Those faces are byte-identical to the Warrior base templates 1000 and 2000, respectively. Character creation uses these same faces across the class previews. In this PARAM, Type A is `1` and Type B is `0`.
+- With no imported face, export links to the verified stock row and leaves `FaceParam` untouched. Selecting a save slot captures the supported appearance immediately. Later exports use that snapshot without reading the save again; the default and imported appearance both fit in the existing JSON profile schema.

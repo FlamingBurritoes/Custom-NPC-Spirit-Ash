@@ -4,7 +4,7 @@
 
 A Windows desktop app lets a player select a character from an Elden Ring save, import their appearance, equip the resulting companion with vanilla gear, and choose a combat archetype. The player can see how the equipment looks together and give the companion's Spirit Ash a name and portrait. The app prepares an offline Mod Engine 3 profile. The player obtains and uses the ash through its existing in-game item and acquisition path.
 
-Target the Steam PC version, one verified game patch, one replaceable ash, and one active companion. The app can keep multiple profiles on disk. The first public release targets two tested archetypes, Melee and Caster, with a defined list of supported weapons, skills, spells, and consumables. Expand that list as combinations pass testing. Plan for a static, rotatable gear preview on a mannequin. Exact facial rendering in the editor, custom gear, multiple simultaneous companions, live item grants, and mid-session editing are future features.
+Target the Steam PC version, one verified game patch, one replaceable ash, and one active companion. The app can keep multiple profiles on disk. The first public release targets two tested archetypes, Melee and Caster, with a defined list of supported weapons, skills, spells, and consumables. Expand that list as combinations pass testing. Show stock inventory icons for selected items. Exact character rendering in the editor, custom gear, multiple simultaneous companions, live item grants, and mid-session editing are out of scope.
 
 ## Milestones
 
@@ -15,7 +15,7 @@ Target the Steam PC version, one verified game patch, one replaceable ash, and o
 | 2. Appearance and architecture decision | Two imported appearances are applied and compared in-game | Two visibly different faces and body types reproduce consistently, and the chosen implementation is recorded |
 | 3. Export and playable alpha | A profile edits and deploys a companion from the desktop app | A player changes equipment, exports, launches, and sees the change through normal ash use |
 | 4. Combat and balancing | Two archetypes and basic stat tuning | Repeated tests show the intended differences and both presets handle their supported loadouts |
-| 5. Ash presentation and equipment preview | A named ash with a portrait, plus a rotatable gear preview | The ash looks correct in inventory, and a representative mix-and-match outfit previews correctly |
+| 5. Ash presentation and equipment preview | A named ash with a portrait, plus stock inventory icons for selected items | The ash looks correct in inventory, and selecting different base-game and DLC gear updates the icons |
 | 6. Release and maintenance | Versioned Windows package and instructions | A fresh Windows test setup can install, create a summon, play, switch profiles, and uninstall |
 
 ## 0. Set up GitHub, OpenCode, and the test game
@@ -38,7 +38,7 @@ Spirit Battler is a precedent for replacing an ash and configuring humanoids. It
 
 ## 2. Import appearance and pick one game integration
 
-1. Read the selected save slot without writing to it. Capture only the fields the companion needs, starting with body type and appearance. Use two deliberately different characters. A preset JSON import is a possible fallback if full save parsing takes longer than expected.
+1. Start with the stock character-creation appearance. Optionally read a selected save slot without writing to it. Capture body type and appearance in the profile so exporting or loading a build does not depend on the original save. Test two deliberately different characters.
 2. Try mapping the imported values into the NPC appearance and character-initialisation data for the file-only summon. Compare both faces and bodies visually in-game, including without a helmet. Check which imported values round-trip reliably. Treat exact conversion as unverified until this passes.
 3. If the file-only result meets the fidelity target, use the C# exporter for game data. If exact appearance is essential and direct conversion is unreliable, prototype a small Rust DLL loaded by me3. It reads the same profile and applies it to the intended summoned character. Evaluate the supported game patch and dependency terms before adopting `fromsoftware-rs`. ER Echo demonstrates a runtime path for appearance import.
 4. Record the decision in the repo. Keep one shipped game integration. If the runtime path needs more investigation, use a named appearance preset for the internal alpha and keep exact import as a release gate.
@@ -62,10 +62,10 @@ Run repeated fights against a close-range enemy and an enemy that starts at rang
 
 1. Keep the donor item's ID and acquisition path. Export the new name and description through the game's text resources. Verify inventory, quick slots, and spirit tuning for the tested upgrade levels and language. Check whether any separate display text needs its own edit.
 2. Offer a default icon and let the player import and crop a screenshot or PNG. Verify the small icon and detail view where applicable. Test one hand-made portrait end to end before automating texture packaging. Use the player's local installation as the source for required game assets.
-3. Prototype the preview with one body type, one outfit, and one weapon. Resolve the asset IDs, load the meshes and textures, attach weapons, and confirm scale and orientation. Then add the second body type and mixed armour pieces. Compare representative outfits with in-game screenshots to catch mismatched variants, hidden body parts, or bad attachments. Give unavailable models an icon fallback.
-4. Treat the portrait and preview as independent features. The portrait can come from a screenshot even if some assets are missing from the preview.
+3. Resolve item icon IDs from stock PARAMs and display the matching inventory tiles beside the item selectors. Leave entries without stock art blank.
+4. Treat the portrait and inventory previews as independent features. Importing a portrait does not change the stock target thumbnail.
 
-[Equipment model workflow](https://soulsmodding.com/doku.php?id=tutorial%3Aexport-edit-and-import-models) · [Item icon replacement guide](https://www.nexusmods.com/eldenring/articles/747)
+[Item icon replacement guide](https://www.nexusmods.com/eldenring/articles/747)
 
 ## 6. Package and release
 

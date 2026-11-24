@@ -53,6 +53,29 @@ write('Armor', ((i,n,b[214]) for i,n,b in table('EquipParamProtector',416)
 write('Talismans', ((i,n,i32(b,4)) for i,n,b in table('EquipParamAccessory',96)
                      if named(n) and b[49]==2 and i32(b,4)>0))
 goods = list(table('EquipParamGoods',176))
+buddy = list(table('BuddyParam',160))
+def ash_targets():
+    for i,n,b in goods:
+        if i < 200000 or i % 1000 or b[62] not in (7,8) or b[63] != 2 or not named(n) or i == 207000:
+            continue
+        trigger = i32(b,4)
+        triggers = (trigger,233100,233200) if i == 233000 else (trigger,)
+        for row,label,data in buddy:
+            effect = i32(data,4)
+            if effect not in triggers or i32(data,8) < 0:
+                continue
+            if i == 2220000:
+                label = 'Jolán' if i32(data,84) == 2024092 else 'Anna'
+                n = 'Jolán and Anna'
+            if i == 206000:
+                label = 'Nightmaiden' if row == 20600000 else 'Swordstress'
+            if i == 233000:
+                level = {233000: '+0 to +4', 233100: '+5 to +9', 233200: '+10'}[effect]
+                label = f'Giant Rat {row % 100 + 1} ({level})'
+            if i == 2219000:
+                n = 'Swordhand of Night Jolán'
+            yield i,n,row,effect,u16(b,48),label or n
+write('AshTargets', ash_targets())
 spell_goods = {i for i,n,b in goods if b[62] in (5,16,17,18) and n.startswith(('[Sorcery] ','[Incantation] '))}
 write('Spells', ((i,n.split('] ',1)[1],b[34],b[35],b[14],i32(b,116),b[38]) for i,n,b in table('Magic',168)
                 if i in spell_goods and n.startswith(('[Sorcery] ','[Incantation] ')) and 'unused' not in n.lower()))

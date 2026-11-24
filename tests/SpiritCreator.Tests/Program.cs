@@ -174,13 +174,13 @@ Check(SpellCatalog.ForWeapon(EquipmentCatalog.GlintstoneStaff).Any(spell => spel
 Check(JsonSerializer.Deserialize<SpiritProfile>(
         JsonSerializer.Serialize(withAshes, SpiritProfile.JsonOptions), SpiritProfile.JsonOptions)
     is { RightAshOfWarId: 50200, LeftAshOfWarId: 30900 }, "Ash selections survive JSON round-trip");
-Check(profile.Face.Count == 157 && profile.Face["hair_partsId"] == 9 &&
+Check(profile.Face is { Count: 157 } && profile.Face["hair_partsId"] == 9 &&
       profile.Face["faceGeoData01"] == 201 && profile.Face["chrBodyScaleRLeg"] == 173, "mapping");
 Check(originalHash.SequenceEqual(SHA256.HashData(bytes)), "input remained unchanged");
 var json = JsonSerializer.Serialize(profile, SpiritProfile.JsonOptions);
 var roundTrip = JsonSerializer.Deserialize<SpiritProfile>(json, SpiritProfile.JsonOptions)!;
 roundTrip.Validate();
-Check(profile.Face.OrderBy(p => p.Key).SequenceEqual(roundTrip.Face.OrderBy(p => p.Key)), "JSON round-trip");
+Check(profile.Face!.OrderBy(p => p.Key).SequenceEqual(roundTrip.Face!.OrderBy(p => p.Key)), "JSON round-trip");
 (roundTrip with { WeaponId = SpiritProfile.BattleAxe }).Validate();
 Check(roundTrip is { HpPercent: 100, DamagePercent: 100 }, "neutral combat defaults");
 var legacyJson = JsonSerializer.SerializeToNode(profile, SpiritProfile.JsonOptions)!.AsObject();
@@ -226,8 +226,255 @@ Write(face + 0x127, 81000);
 HashEntry(slotStart, slotSize);
 Reject(() => SaveAppearance.Import(bytes, "Fixture"), "unsupported quest override");
 Console.WriteLine("Synthetic save import, mapping, JSON and validation checks passed.");
-if (args is [var stockPath])
+Reject(() => (profile with { SummonName = "Bad<name>" }).Validate(), "summon name markup");
+Reject(() => (profile with { SummonName = new string('x', 41) }).Validate(), "summon name length");
+Reject(() => (profile with { TargetAshId = 232000 }).Validate(), "multi-spawn target needs an explicit row");
+Reject(() => (profile with { TargetAshId = 232000, TargetBuddyRowId = 23600000 }).Validate(), "row belongs to another Ash");
+Reject(() => (profile with { TargetAshId = 207000, TargetBuddyRowId = 20700001 }).Validate(), "Mimic Tear is not supported");
+(profile with { TargetAshId = 232000, TargetBuddyRowId = 23200001 }).Validate();
+var defaultProfile = SpiritProfile.CreateDefault();
+defaultProfile.Validate();
+var defaultJson = JsonSerializer.Serialize(defaultProfile, SpiritProfile.JsonOptions);
+Check(!defaultJson.Contains("\"face\"", StringComparison.Ordinal), "default profile needs no appearance fields");
+var defaultRoundTrip = JsonSerializer.Deserialize<SpiritProfile>(
+    """{"schemaVersion":1,"regulationVersion":"11730034","weaponId":11010000}""", SpiritProfile.JsonOptions)!;
+defaultRoundTrip.Validate();
+Check(defaultRoundTrip.Face is null && defaultRoundTrip.BodyType == 1, "omitted appearance uses stock Type A");
+Reject(() => (defaultProfile with { Face = [] }).Validate(), "incomplete imported face is not the default");
+if (args.Length > 0)
+{
+    var stockPath = args[0];
     VerifyCombatExports(stockPath);
+    VerifyAshTargets(stockPath);
+    VerifyDefaultAppearance(stockPath);
+    if (args.Contains("--names", StringComparer.Ordinal))
+        VerifySummonName(stockPath);
+    if (args.Contains("--portrait", StringComparer.Ordinal))
+        VerifyPortrait(stockPath);
+    if (args.Contains("--icons", StringComparer.Ordinal))
+        VerifyInventoryIcons(stockPath);
+}
+
+void VerifyDefaultAppearance(string stockPath)
+{
+    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-default-tests-" + Guid.NewGuid().ToString("N"));
+    try
+    {
+        var stock = RegulationBinary.Read(File.ReadAllBytes(stockPath));
+        var characters = new RegulationParam(stock.Table("CharaInitParam"), "CHARACTER_INIT_PARAM", 320);
+        var faces = new RegulationParam(stock.Table("FaceParam"), "FACE_PARAM_ST", 240);
+        foreach (var (body, previewId, templateId) in new[] { ((byte)1, 3118, 1000), ((byte)0, 3119, 2000) })
+        {
+            var output = Path.Combine(root, body.ToString());
+            RegulationExporter.Export(defaultProfile with { BodyType = body }, stockPath, output);
+            var result = RegulationBinary.Read(File.ReadAllBytes(Path.Combine(output, "mod", "regulation.bin")));
+            var init = new RegulationParam(result.Table("CharaInitParam"), "CHARACTER_INIT_PARAM", 320).Row(99000);
+            var starter = characters.Row(previewId);
+            Check(init[228] == starter[228] && init[228] == body &&
+                RegulationBinary.I32(init, 164) == RegulationBinary.I32(starter, 164) &&
+                RegulationBinary.I32(init, 164) == previewId &&
+                faces.Row(previewId).SequenceEqual(faces.Row(templateId)), "appearance matches the stock character creator");
+            Check(result.Table("FaceParam").SequenceEqual(stock.Table("FaceParam")), "default export does not modify FaceParam");
+        }
+        Console.WriteLine("Default appearance exports verified against the game’s Type A and Type B character-creation presets.");
+    }
+    finally
+    {
+        if (Directory.Exists(root))
+            Directory.Delete(root, recursive: true);
+    }
+}
+
+void VerifyInventoryIcons(string stockPath)
+{
+    var icons = InventoryIcons.Load(stockPath);
+    var samples = new InventoryItem[]
+    {
+        new(InventoryKind.Weapon, 11010000), // Club
+        new(InventoryKind.Weapon, 50000000), // Arrow
+        new(InventoryKind.Armor, 1500100), // Knight Armor
+        new(InventoryKind.Armor, 5200100), // Death Knight Armor
+        new(InventoryKind.Talisman, 1000), // Crimson Amber Medallion
+        new(InventoryKind.Consumable, 300),
+        new(InventoryKind.Spell, 4000), // Glintstone Pebble
+        new(InventoryKind.AshOfWar, 50200), // Storm Stomp
+        new(InventoryKind.SpiritAsh, 236000),
+        new(InventoryKind.SpiritAsh, 2200000)
+    };
+    var unique = new HashSet<string>();
+    foreach (var item in samples)
+    {
+        var rgba = icons.ReadRgba(item);
+        Check(rgba?.Length == SummonPortrait.RgbaBytes, $"{item} has an inventory image");
+        var alpha = rgba!.Where((_, i) => i % 4 == 3);
+        Check(alpha.Any(a => a == 0) && alpha.Any(a => a > 160), $"{item} has transparent background and visible art");
+        Check(unique.Add(Convert.ToHexString(MD5.HashData(rgba!))), $"{item} has distinct art");
+    }
+    Check(icons.ReadRgba(new(InventoryKind.AshOfWar, -1)) is null, "default weapon skill is not an item");
+    Check(icons.ReadRgba(new(InventoryKind.Consumable, 1220)) is null, "missing stock art stays blank");
+    Console.WriteLine("Inventory images verified for weapon, ammunition, armor, talisman, consumable, spell, Ash of War, and base/DLC Spirit Ashes.");
+}
+
+void VerifyPortrait(string stockPath)
+{
+    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-portrait-tests-" + Guid.NewGuid().ToString("N"));
+    var folder = Path.GetDirectoryName(Path.GetFullPath(stockPath))!;
+    try
+    {
+        var rgba = new byte[SummonPortrait.RgbaBytes];
+        for (var pixel = 0; pixel < rgba.Length; pixel += 4)
+        {
+            rgba[pixel] = 213;
+            rgba[pixel + 1] = 51;
+            rgba[pixel + 2] = 95;
+            rgba[pixel + 3] = 255;
+        }
+        RegulationExporter.Export(profile with { TargetAshId = 2200000 }, stockPath, root, rgba);
+        var mod = Path.Combine(root, "mod");
+        Check(!Directory.Exists(Path.Combine(mod, "msg")), "portrait works without a custom name");
+        using var archive = new StockMessageArchive(folder);
+        using var codec = new MessageOodle(Path.Combine(folder, "oo2core_6_win64.dll"));
+        var path = SummonPortrait.RelativePath;
+        var stock = codec.Decode(archive.ReadAsset("/" + path, 70_000_000), 204_000_000);
+        var portrait = codec.Decode(File.ReadAllBytes(Path.Combine(mod, path)), 204_000_000);
+        var layout = SummonPortrait.ReadTiles(SummonPortrait.ReadLayout(archive, codec));
+        foreach (var ash in AshTargetCatalog.Options)
+            _ = SummonPortrait.LocateTile(stock, SummonPortrait.FindTile(layout, ash.IconId));
+        var meera = AshTargetCatalog.Options.Single(ash => ash.GoodsId == 2200000);
+        var (start, stride) = SummonPortrait.LocateTile(stock, SummonPortrait.FindTile(layout, meera.IconId));
+        Check(stock.Length == portrait.Length, "portrait preserves texture layout");
+        // Mode 6 solid-color block with odd endpoint components and all zero interpolation indices.
+        var expected = Convert.FromHexString("40B53A9379BDFEFF0100000000000000");
+        Span<byte> block = stackalloc byte[16];
+        SummonPortrait.EncodeBlock(rgba.AsSpan(0, 64), block);
+        Check(block.SequenceEqual(expected), $"BC7 solid-color encoding: {Convert.ToHexString(block)}");
+        var cursor = 0;
+        for (var y = 0; y < 40; y++)
+        {
+            var at = start + y * stride;
+            Check(stock.AsSpan(cursor, at - cursor).SequenceEqual(portrait.AsSpan(cursor, at - cursor)), "art outside icon is unchanged");
+            for (var x = 0; x < 40; x++)
+                Check(portrait.AsSpan(at + x * 16, 16).SequenceEqual(expected), "icon contains test portrait");
+            cursor = at + 40 * 16;
+        }
+        Check(stock.AsSpan(cursor).SequenceEqual(portrait.AsSpan(cursor)), "remaining textures are unchanged");
+        Console.WriteLine("Portrait export verified: all 1,600 replacement blocks and all untouched atlas bytes.");
+    }
+    finally
+    {
+        if (Directory.Exists(root))
+            Directory.Delete(root, recursive: true);
+    }
+}
+
+void VerifySummonName(string stockPath)
+{
+    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-name-tests-" + Guid.NewGuid().ToString("N"));
+    var game = Path.GetDirectoryName(Path.GetFullPath(stockPath))!;
+    using var stockArchive = new StockMessageArchive(game);
+    using var oodle = new MessageOodle(Path.Combine(game, "oo2core_6_win64.dll"));
+    var stockText = oodle.Decode(stockArchive.ReadEnglishMessage("item_dlc02.msgbnd.dcx"));
+    foreach (var ash in AshTargetCatalog.Options)
+    {
+        _ = SummonMessages.Rename(stockText, "Test", ash.GoodsId, out var renamed);
+        Check(renamed, $"English Ash names exist for {ash.Name}");
+    }
+    try
+    {
+        const string name = "Éowyn's Echo";
+        RegulationExporter.Export(profile with
+        {
+            SummonName = name, Shade = CompanionShade.Puppet, TargetAshId = 2220000, TargetBuddyRowId = 32200000
+        }, stockPath, root);
+        var mod = Path.Combine(root, "mod");
+        var package = RegulationBinary.Read(File.ReadAllBytes(Path.Combine(mod, "regulation.bin")));
+        var buddy = new RegulationParam(package.Table("BuddyParam"), "BUDDY_PARAM_ST", 160);
+        var npc = new RegulationParam(package.Table("NpcParam"), "NPC_PARAM_ST", 736);
+        var id = RegulationBinary.I32(buddy.Row(32200000), 8);
+        Check(id != RegulationBinary.I32(buddy.Row(25900000), 8) &&
+            RegulationBinary.I32(npc.Row(id), 12) == SummonMessages.NpcNameId, "private in-game name link");
+        var files = Directory.GetFiles(Path.Combine(mod, "msg", "engus"), "*.msgbnd.dcx");
+        Check(files.Length == 3, "base and DLC archives emitted");
+        foreach (var file in files)
+        {
+            var b = oodle.Decode(File.ReadAllBytes(file));
+            foreach (var idToCheck in new[] { 10, 18, 319 })
+            {
+                int h = Enumerable.Range(0, RegulationBinary.I32(b, 12)).Select(i => 64 + i * 36)
+                    .SingleOrDefault(i => RegulationBinary.I32(b, i + 28) == idToCheck);
+                if (idToCheck == 319 && Path.GetFileName(file) == "item.msgbnd.dcx")
+                {
+                    Check(h == 0, "base archive has no DLC names");
+                    continue;
+                }
+                var fmg = SummonMessages.ReadFmg(b.AsSpan(RegulationBinary.I32(b, h + 24), RegulationBinary.I32(b, h + 8)));
+                if (idToCheck == 18)
+                    Check(fmg[SummonMessages.NpcNameId] == name, "NPC name");
+                else if (idToCheck == 10)
+                {
+                    Check(fmg[259000] == "Nepheli Loux Puppet", "unrelated Ash untouched");
+                    Check(fmg[236000] == "Spirit Jellyfish Ashes", "Jellyfish name untouched");
+                }
+                else
+                {
+                    for (var level = 0; level <= 10; level++)
+                        Check(fmg[2220000 + level] == name + (level == 0 ? "" : $" +{level}"), "all DLC Ash upgrade names");
+                }
+            }
+        }
+        Console.WriteLine("Custom name export: private NPC name and all eleven DLC Ash names verified.");
+    }
+    finally
+    {
+        if (Directory.Exists(root))
+            Directory.Delete(root, recursive: true);
+    }
+}
+
+void VerifyAshTargets(string stockPath)
+{
+    var stock = RegulationBinary.Read(File.ReadAllBytes(stockPath));
+    var buddies = new RegulationParam(stock.Table("BuddyParam"), "BUDDY_PARAM_ST", 160);
+    var goods = new RegulationParam(stock.Table("EquipParamGoods"), "EQUIP_PARAM_GOODS_ST", 176);
+    Check(AshTargetCatalog.Options.Count == 83 && AshTargetCatalog.Options.Sum(ash => ash.Rows.Count) == 151,
+        "all supported stock targets and rows");
+    foreach (var ash in AshTargetCatalog.Options)
+    {
+        for (var level = 0; level <= 10; level++)
+        {
+            var item = goods.Row(ash.GoodsId + level);
+            var icon = BinaryPrimitives.ReadUInt16LittleEndian(item[48..]);
+            var expected = ash.GoodsId == 233000 && level >= 5 ? (level == 10 ? 480 : 479) : ash.IconId;
+            Check(item[62] is 7 or 8 && icon == expected, "stock Ash icon and upgrade variant");
+        }
+        foreach (var row in ash.Rows)
+            Check(RegulationBinary.I32(buddies.Row(row.RowId), 4) == row.TriggerEffectId, "stock trigger mapping");
+    }
+    var root = Path.Combine(Path.GetTempPath(), "SpiritCreator-target-tests-" + Guid.NewGuid().ToString("N"));
+    try
+    {
+        foreach (var (ash, row) in new[] { (232000, 23200001), (2220000, 32200000), (233000, 23320002) })
+        {
+            var output = Path.Combine(root, row.ToString());
+            RegulationExporter.Export(profile with { TargetAshId = ash, TargetBuddyRowId = row }, stockPath, output);
+            var result = RegulationBinary.Read(File.ReadAllBytes(Path.Combine(output, "mod", "regulation.bin")));
+            var after = new RegulationParam(result.Table("BuddyParam"), "BUDDY_PARAM_ST", 160);
+            Check(after.Ids.SequenceEqual(buddies.Ids), "no rows added or removed");
+            foreach (var id in buddies.Ids.Where(id => id != row))
+                Check(after.Row(id).SequenceEqual(buddies.Row(id)), $"other spawn row {id} stays stock");
+            Check(RegulationBinary.I32(after.Row(row), 84) == 99000 &&
+                after.Row(row).Slice(4, 4).SequenceEqual(buddies.Row(row).Slice(4, 4)) &&
+                after.Row(row).Slice(24, 12).SequenceEqual(buddies.Row(row).Slice(24, 12)), "only selected slot replaced with same trigger and position");
+            Check(result.Table("EquipParamGoods").SequenceEqual(stock.Table("EquipParamGoods")), "all item costs and upgrade paths remain stock");
+        }
+        Console.WriteLine("Ash targets verified: group member, DLC pair member, and Giant Rat upgrade-only member.");
+    }
+    finally
+    {
+        if (Directory.Exists(root))
+            Directory.Delete(root, recursive: true);
+    }
+}
 
 void Write(int offset, uint value) => BinaryPrimitives.WriteUInt32LittleEndian(bytes.AsSpan(offset), value);
 void HashEntry(int start, int size) =>
@@ -353,7 +600,7 @@ void VerifyCombatExports(string stockPath)
                     BinaryPrimitives.ReadUInt16LittleEndian(init[180..]) == 99, "arrow and bolt slots and quantities");
             for (var slot = 0; slot < SpellCatalog.SlotCount; slot++)
                 Check(RegulationBinary.I32(init, 96 + slot * 4) == (slot < spells.Length ? spells[slot] : -1), "equipped spells");
-            var talismans = setup.TalismanIds ?? [1210, 2130];
+            var talismans = setup.TalismanIds ?? [];
             for (var slot = 0; slot < ExtrasCatalog.TalismanSlots; slot++)
                 Check(RegulationBinary.I32(init, 64 + slot * 4) == (slot < talismans.Length ? talismans[slot] : -1), "equipped talismans");
             var items = setup.Consumables ?? [];

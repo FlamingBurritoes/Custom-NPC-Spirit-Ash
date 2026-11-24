@@ -1,6 +1,6 @@
 # Elden Ring Spirit Creator
 
-An early Windows desktop app and command-line tool for turning a character's appearance into a friendly Spirit Jellyfish replacement. It exports a file-only, offline Mod Engine 3 profile. It does not edit the original save, replace Steam game files, or import the character's equipment or stats.
+An early Windows desktop app and command-line tool for turning a character's appearance into a friendly Spirit Ash replacement. It exports a file-only, offline Mod Engine 3 profile. It does not edit the original save, replace Steam game files, or import the character's equipment or stats.
 
 ## Use the desktop app
 
@@ -14,13 +14,19 @@ dotnet publish .\src\SpiritCreator.Desktop -c Release -o .\artifacts\elden-ring-
 
 Re-export any profiles from the original `desktop-direct` build; those files have an invalid compression header.
 
-1. Click **Import save…**. The Windows file picker starts at `%APPDATA%\EldenRing`, one level above the account folder, if that directory exists. Open your folder and select a PC `.sl2` or `.sl2.bak` file. To use a backup elsewhere, browse to it instead.
-2. Choose an active character by name and slot number. The app shows only the filename, not the full save path, and does not display or store the Steam ID.
+1. Start with Elden Ring’s default Type A character-creation appearance, or click **Import appearance from save…** and select a character from a PC `.sl2` or `.sl2.bak` file. The app copies the appearance when you select the slot; it doesn’t need the save again to export. **Use default appearance** switches back without changing the build. The app shows only the save filename and doesn’t display the Steam ID.
+2. Under **Replacement target**, choose a **Spirit Ash** and its **Spawn row**. Single-member ashes select their row automatically. With group ashes, choose the exact row by member name and ID; the other members stay vanilla. Spirit Jellyfish Ashes is the default. This does not grant the selected item, so use one you own on the test save. Mimic Tear is excluded because its player-copying spawn is not supported.
 3. Choose a **Combat preset**. Switching presets does not change your gear. Click **Apply starter gear** to replace the two hand slots and reset their skills, affinities, and reinforcement without changing your attributes, armor, shade, or tuning.
 4. Set your **Attributes** and **Equipment**. New builds start at level 1 with 10 in every attribute, a Club, and no armor. Each attribute point above 10 adds one level. Clear an attribute and press Enter or leave the field to reset it to 10. The two hand slots and the head, chest, hands, and legs slots are independent.
 5. For each hand, choose an **Ash of War**, **Affinity (infusion)**, and **Reinforcement** separately. Affinity choices depend on the weapon and selected Ash. **Default weapon skill** keeps the weapon’s built-in skill. Regular weapons go from **+0 to +25**, and Somber weapons like Stormhawk Axe and Rivers of Blood go from **+0 to +10** without infusion options. Weapon reinforcement is independent of the Spirit Ash’s upgrade level. Export checks one-handed stat requirements, but equipping a skill does not guarantee the AI will use it.
-6. Under **Equipment**, expand **Talismans and consumables** to set up to four passive talismans and three quick-item types. Quick items are empty by default. Talismans start with the two already inherited from Nepheli: Bull-Goat’s and Axe Talisman. Set a slot to **None** to clear it.
-7. Pick a **Companion shade**: No shade (default), Spirit Ash (white), Invader (red), Puppet (blue), or Cooperator (gold). This is cosmetic only. Optionally set **HP (%)** and **Damage (%)** from 50 to 200. At 100, no extra reinforcement multiplier is applied. Click **Export offline profile**, then **Launch offline**. Use the Jellyfish Ashes on the separate test save. Fully quit the game before switching exports.
+6. Under **Equipment**, expand **Talismans and consumables** to set up to four passive talismans and three quick-item types. All slots start at **None**.
+7. Pick a **Companion shade**: No shade (default), Spirit Ash (white), Invader (red), Puppet (blue), or Cooperator (gold). This is cosmetic only. Optionally set **HP (%)** and **Damage (%)** from 50 to 200. At 100, no extra reinforcement multiplier is applied. Click **Export offline profile**, then **Launch offline**. Use the selected Ashes on the separate test save. Fully quit the game before switching exports.
+
+Selections show their Elden Ring inventory icons beside the controls: weapons, armor, ammunition, Ashes of War, spells, talismans, consumables, and the replacement Spirit Ash. Widen the window for larger images (up to the artwork’s native 160 × 160). Images load from your installed Steam 1.17.3 Game folder and work offline. If the app can’t find it, use **Tool paths → Find regulation.bin…**. Empty slots and entries without stock artwork show no image. These previews are separate from the custom Ashes portrait and don’t change your exports.
+
+To rename the companion, enter a **Summon name** under **Appearance and combat tuning**. This sets the NPC's name and renames the selected Ash item in English (US), including the `+1` through `+10` variants. The name and portrait are shared by the entire item, even if you only replaced one member of a group. Leave the name blank to keep the original text. Custom names require the stock `regulation.bin` in the installed Game folder, not a standalone copy. The export does not change the item ID or description, and does not add a label to the spirit health HUD.
+
+Use **Import portrait…** in the same section to preview a center-cropped PNG or JPEG and replace the regular Ashes icon on export. **Remove** restores the stock icon on the next export. Portraits require the installed Game folder and add about 65 MB per export because the game loads a shared texture archive. The separate large item-detail illustration is unchanged. Avoid combining the portrait export with other mods that replace `menu/hi/01_common.tpf.dcx`.
 
 | Combat preset | What changes |
 |---|---|
@@ -47,7 +53,7 @@ From the project folder, launch a generated profile:
 me3 launch --profile .\artifacts\fists-jawbone\spirit.me3
 ```
 
-The profile uses `SpiritCreatorTest.sl2`, not the normal save. Use the +0 Spirit Jellyfish Ashes where they normally work, then fully quit the game before switching to another profile. Inside `artifacts/`, profiles, executables, and generated game data are local-only and excluded from Git.
+The profile uses `SpiritCreatorTest.sl2`, not the normal save. Use the selected Ashes where they normally work, then fully quit the game before switching to another profile. Inside `artifacts/`, profiles, executables, and generated game data are local-only and excluded from Git.
 
 ## Build and export
 
@@ -71,7 +77,11 @@ Set `spellIds` to a list of up to seven compatible IDs, e.g. `"spellIds": [6900,
 
 Use base weapon IDs for `weaponId` and `leftWeaponId`. Set `rightAffinity` / `leftAffinity` to an affinity name such as `"Cold"` or `"FlameArt"` (default `"Standard"`), and `rightReinforcement` / `leftReinforcement` to a level (default `0`). These settings are independent for each hand.
 
-Set optional `talismanIds` to up to four catalog IDs (e.g. `[1000, 4003]`), and `consumables` to up to three item stacks (e.g. `[{"id": 50201, "quantity": 1}]` for one NPC Crimson Flask). Omit those fields to retain the original Nepheli slots, or use `[]` to clear them. Consumables replace only the quick-item slots, not the source summon’s secondary slots.
+Set optional `talismanIds` to up to four catalog IDs (e.g. `[1000, 4003]`), and `consumables` to up to three item stacks (e.g. `[{"id": 50201, "quantity": 1}]` for one NPC Crimson Flask). Omit `talismanIds` or set it to `[]` to equip none. Consumables replace only the quick-item slots, not the source summon’s secondary slots. Set `summonName` to rename the NPC and Ashes in English (US).
+
+Set `targetAshId` to the selected base goods ID and `targetBuddyRowId` to its exact spawn row. For example, `232000` and `23200001` replace the second Lone Wolf. Single-member ashes can omit the row ID. Omit both fields for Spirit Jellyfish Ashes. See [the target catalog](src/SpiritCreator.Core/Catalog/AshTargets.tsv) for stock IDs.
+
+Omit `face` (or set it to `null`) to use the stock character-creation face. Omit `bodyType` for Type A (`1`); set it to `0` for Type B. Imported profiles include the full supported appearance in `face` and do not depend on the original save.
 
 This alpha accepts only the verified stock Steam **1.17.3** regulation (`11730034`) and PC saves with character slot versions `210` or `211`. It uses the base appearance only; decals, face accessories, and quest-related appearance overrides are not supported. See [learnings.md](learnings.md) for the mapping and what still needs in-game verification.
 
